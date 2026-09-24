@@ -1,0 +1,1182 @@
+/* Bizning o'zgarishlarimiz (asl nqaae.uz stillari ustidan) */
+
+/* Tashkilot kartochkasida 4 ta ma'lumot: katta ekranda 4 ustun, o'rtachada 2x2 */
+@media only screen and (min-width: 1600px) {
+  .university-header-content-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1599px) {
+  .university-header-content-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Pedagoglar: "Sertifikatga ega pedagoglar" kartochkasi */
+.teacher-certs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.teacher-certs__item {
+  --accent: #3e7bb6;
+  --accent-soft: #d5ebff;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--accent-soft) 0%, rgba(213, 235, 255, 0) 100%);
+  border-left: 4px solid var(--accent);
+}
+.teacher-certs__item--national {
+  --accent: #19ae8b;
+  --accent-soft: rgba(25, 174, 139, 0.18);
+}
+.teacher-certs__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.teacher-certs__icon {
+  flex-shrink: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--accent);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 9.4px 0 rgba(0, 0, 0, 0.1);
+}
+.teacher-certs__icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+.teacher-certs__text {
+  flex: 1;
+  min-width: 0;
+}
+.teacher-certs__label {
+  color: #697d9f;
+  font-size: 15px;
+  line-height: 1.2;
+  margin-bottom: 4px !important;
+}
+.teacher-certs__value {
+  color: #000;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.teacher-certs__value .teacher-certs__num {
+  font-size: 26px !important;
+  font-weight: 600;
+  color: #000;
+}
+.teacher-certs__value .teacher-certs__unit {
+  font-size: 15px;
+  font-weight: 400;
+  color: #3a4a66;
+}
+.teacher-certs__percent {
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 600;
+}
+.teacher-certs__bar {
+  height: 10px;
+  margin: 14px 0 8px;
+  border-radius: 10px;
+  background: rgba(105, 125, 159, 0.15);
+  overflow: hidden;
+}
+.teacher-certs__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  background: var(--accent);
+}
+.teacher-certs__note {
+  color: #697d9f;
+  font-size: 13px;
+}
+/* O'quvchilar: Davomat kartochkasi */
+.attendance-card {
+  --accent: #3c878c;
+  --accent-soft: rgba(60, 135, 140, 0.18);
+}
+
+/* Bitiruvchilar */
+.grad-kpis {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 16px;
+}
+.grad-overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #dfe4ed;
+  box-shadow: 0 5px 40px 0 rgba(37, 87, 90, 0.08);
+}
+.grad-overview__stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.grad-overview__stat {
+  --accent: #3e7bb6;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+.grad-overview__divider {
+  width: 1px;
+  align-self: stretch;
+  background: #dfe4ed;
+}
+.grad-overview__value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.grad-overview__value .teacher-certs__num {
+  font-size: 30px !important;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.1;
+}
+.grad-overview__value .teacher-certs__unit {
+  font-size: 15px;
+  color: #3a4a66;
+}
+.grad-overview__pct {
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  background: #d5ebff;
+  color: #3e7bb6;
+  font-size: 16px;
+  font-weight: 600;
+}
+.grad-overview__split {
+  display: flex;
+  gap: 4px;
+  height: 12px;
+  margin: 18px 0 8px;
+}
+.grad-overview__split span {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+}
+.grad-overview__split .is-in,
+.grad-overview__legend .is-in {
+  background: #3e7bb6;
+}
+.grad-overview__split .is-out,
+.grad-overview__legend .is-out {
+  background: #e74c3c;
+}
+.grad-overview__split .is-rest,
+.grad-overview__legend .is-rest {
+  background: #c9d3e3;
+}
+/* Qabul: tanlov kartochkasi */
+.competition-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(270deg, #19ae8b 0, #23939f 50%, #3e7bb6 100%);
+}
+.competition-card__label {
+  font-size: 15px;
+  opacity: 0.85;
+}
+.competition-card__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.competition-card__main b {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+.competition-card__main span {
+  font-size: 15px;
+  line-height: 1.25;
+}
+.competition-card__text {
+  font-size: 14px;
+  opacity: 0.9;
+}
+.competition-card__chance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 14px;
+}
+.competition-card__chance b {
+  font-size: 20px;
+  font-weight: 600;
+}
+.grad-overview__legend {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #697d9f;
+}
+.grad-overview__legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.grad-overview__legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.grad-kpi {
+  --accent: #3e7bb6;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #dfe4ed;
+  box-shadow: 0 5px 40px 0 rgba(37, 87, 90, 0.08);
+}
+.grad-kpi--grade {
+  --accent: #19ae8b;
+}
+.grad-kpi__body {
+  flex: 1;
+  min-width: 0;
+}
+.grad-kpi__value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.grad-kpi__value .teacher-certs__num {
+  font-size: 30px !important;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.1;
+}
+.grad-kpi__value .teacher-certs__unit {
+  font-size: 15px;
+  color: #3a4a66;
+}
+.grad-kpi__badge {
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 600;
+}
+.grad-kpi__value .grade-scale,
+.grad-kpi__value .teacher-certs__note {
+  flex-basis: 100%;
+}
+.grade-scale__track {
+  position: relative;
+  height: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background: rgba(105, 125, 159, 0.15);
+}
+.grade-scale__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #3e7bb6, #19ae8b);
+}
+.grade-scale__marker {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #19ae8b;
+  transform: translate(-50%, -50%);
+}
+.grade-scale__ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #697d9f;
+}
+.grad-hint {
+  color: #697d9f;
+  font-size: 14px;
+  margin: -14px 0 16px !important;
+}
+.grad-rank {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.grad-rank__row {
+  --accent: #3e7bb6;
+}
+.grad-rank__row--0 { --accent: #7161ff; }
+.grad-rank__row--1 { --accent: #4e95da; }
+.grad-rank__row--2 { --accent: #23939f; }
+.grad-rank__row--3 { --accent: #3e7bb6; }
+.grad-rank__row--none { --accent: #e74c3c; }
+.grad-rank__row .teacher-certs__bar {
+  margin: 6px 0 0;
+}
+.grad-rank__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 16px;
+  color: #000;
+}
+.grad-rank__count {
+  color: #697d9f;
+  white-space: nowrap;
+}
+.grad-rank__count b {
+  color: #000;
+  font-weight: 600;
+}
+.founder-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(270deg, #19ae8b 0, #23939f 50%, #3e7bb6 100%);
+}
+.founder-card__label {
+  font-size: 15px;
+  opacity: 0.85;
+}
+.founder-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.founder-card__name {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.founder-card__logo {
+  flex-shrink: 0;
+  width: 97px;
+  height: 97px;
+  padding: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 8px 9.4px 0 rgba(0, 0, 0, 0.1);
+}
+.founder-card__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.founder-card__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.founder-card__big {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.founder-card__big b {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+}
+.founder-card__big span {
+  font-size: 18px;
+  font-weight: 500;
+}
+.founder-card__sentence {
+  font-size: 17px;
+  opacity: 0.9;
+}
+.founder-card__share {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.16);
+}
+.founder-card__share-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 15px;
+}
+.founder-card__share-head b {
+  font-size: 24px;
+  font-weight: 600;
+}
+.founder-card__bar {
+  height: 8px;
+  margin-top: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+.founder-card__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 8px;
+  background: #fff;
+}
+.founder-card__stat {
+  font-size: 17px;
+}
+.founder-card__stat b {
+  font-size: 30px;
+  font-weight: 700;
+}
+.founder-card__rows {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.founder-card__rows div {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 14px;
+}
+.founder-card__rows b {
+  font-size: 22px;
+  font-weight: 600;
+}
+.founder-card__btn {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fff;
+  color: #3e7bb6;
+  font-weight: 600;
+}
+.founder-card__btn:hover {
+  color: #19ae8b;
+}
+
+@media only screen and (max-width: 1199px) {
+  .grad-kpis {
+    grid-template-columns: 1fr;
+  }
+  .grad-kpi--grade {
+    grid-column: span 1;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .grad-kpis {
+    grid-template-columns: 1fr;
+  }
+  .grad-overview__stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .grad-overview__divider {
+    display: none;
+  }
+  .grad-kpi--grade {
+    grid-column: span 1;
+  }
+  .teacher-certs__grid {
+    grid-template-columns: 1fr;
+  }
+  .teacher-certs__value {
+    font-size: 22px;
+  }
+}
+
+/* O'quvchilar yutuqlari: guruh sarlavhalari va tanlov ranglari */
+.achievements__group {
+  color: #3a4a66;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px !important;
+}
+.teacher-certs__item--gold {
+  --accent: #ffa151;
+  --accent-soft: rgba(255, 161, 81, 0.2);
+}
+.teacher-certs__item--purple {
+  --accent: #7161ff;
+  --accent-soft: rgba(113, 97, 255, 0.15);
+}
+
+/* Pedagoglar: malaka toifasi va ilmiy daraja */
+.grad-overview__value .teacher-overview__na {
+  font-size: 20px !important;
+  font-weight: 500;
+  color: #697d9f;
+}
+.qual-split {
+  display: flex;
+  gap: 4px;
+  height: 14px;
+  margin-bottom: 18px;
+}
+.qual-split span {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+}
+.qual-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.qual-list__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eef1f6;
+  font-size: 16px;
+  color: #000;
+}
+.qual-list__row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.qual-list__row i {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+.qual-list__name {
+  flex: 1;
+}
+.qual-list__count {
+  color: #697d9f;
+  white-space: nowrap;
+}
+.qual-list__count b {
+  color: #000;
+  font-weight: 600;
+}
+.qual-list__pct {
+  width: 48px;
+  text-align: right;
+  font-weight: 600;
+  color: #3e7bb6;
+}
+.qual-list__row.is-muted .qual-list__name {
+  color: #697d9f;
+}
+.degree-card__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.degree-card__main b {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  color: #7161ff;
+}
+.degree-card__main span {
+  font-size: 15px;
+  line-height: 1.25;
+  color: #3a4a66;
+}
+.degree-card__main em {
+  margin-left: auto;
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 600;
+  color: #7161ff;
+}
+.degree-card__bar {
+  --accent: #7161ff;
+  margin: 14px 0 18px;
+}
+.teacher-certs__item--teal {
+  --accent: #23939f;
+  --accent-soft: rgba(35, 147, 159, 0.16);
+}
+@media only screen and (max-width: 768px) {
+  .grad-overview__stats .grad-overview__stat {
+    width: 100%;
+  }
+}
+
+/* Pedagoglar: yosh tarkibi */
+.age-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.age-card__sample {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #fff4e8;
+  color: #d97a1e;
+  font-size: 13px;
+  font-weight: 600;
+}
+.age-card__body {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 24px;
+  align-items: stretch;
+}
+.age-chart {
+  display: flex;
+  gap: 10px;
+  height: 260px;
+  margin-top: 30px;
+}
+.age-chart__axis {
+  position: relative;
+  width: 34px;
+  flex-shrink: 0;
+  margin-bottom: 26px;
+}
+.age-chart__axis-title {
+  position: absolute;
+  top: -22px;
+  right: 0;
+  font-size: 12px;
+  color: #697d9f;
+}
+.age-chart__tick {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  font-size: 12px;
+  color: #697d9f;
+}
+.age-chart__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.age-chart__plot {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  padding: 0 6px;
+}
+.age-chart__grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed #cfd7e4;
+  pointer-events: none;
+}
+.age-chart__grid.is-base {
+  border-top: 1px solid #b3bccb;
+}
+.age-chart__col {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1;
+}
+.age-chart__bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 56px;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(180deg, #4e95da 0%, #3e7bb6 100%);
+}
+.age-chart__bar--0,
+.age-chart__bar--1 {
+  background: linear-gradient(180deg, #2fc59f 0%, #19ae8b 100%);
+}
+.age-chart__bar--4,
+.age-chart__bar--5 {
+  background: linear-gradient(180deg, #ffb77a 0%, #ffa151 100%);
+}
+.age-chart__pct {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  white-space: nowrap;
+}
+.age-chart__labels {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+  padding: 8px 6px 0;
+}
+.age-chart__label {
+  font-size: 13px;
+  color: #3a4a66;
+  text-align: center;
+  white-space: nowrap;
+}
+.age-card__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.age-card__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(90deg, var(--accent-soft) 0%, rgba(255, 255, 255, 0) 100%);
+}
+.age-card__stat--young {
+  --accent: #19ae8b;
+  --accent-soft: rgba(25, 174, 139, 0.16);
+}
+.age-card__stat--senior {
+  --accent: #ffa151;
+  --accent-soft: rgba(255, 161, 81, 0.18);
+}
+.age-card__stat span {
+  font-size: 14px;
+  color: #697d9f;
+}
+.age-card__stat p {
+  font-size: 15px;
+  color: #3a4a66;
+}
+.age-card__stat b {
+  font-size: 26px;
+  font-weight: 600;
+  color: #000;
+}
+.age-card__stat em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--accent);
+  margin-left: 6px;
+}
+@media only screen and (max-width: 991px) {
+  .age-card__body {
+    grid-template-columns: 1fr;
+  }
+  .age-card__summary {
+    flex-direction: row;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .age-chart {
+    height: 210px;
+  }
+  .age-chart__plot,
+  .age-chart__labels {
+    gap: 6px;
+  }
+  .age-chart__pct {
+    font-size: 12px;
+  }
+  .age-chart__label {
+    font-size: 11px;
+    white-space: normal;
+  }
+  .age-card__summary {
+    flex-direction: column;
+  }
+}
+
+/* Bitiruvchilar kirgan OTMlar: ochiladigan toifalar */
+.grad-acc__toggle {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.grad-acc__toggle:hover .grad-acc__label {
+  color: #3e7bb6;
+}
+.grad-acc__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.grad-acc__chevron {
+  font-size: 12px;
+  color: #697d9f;
+  transition: transform 0.2s ease;
+}
+.grad-acc.is-open .grad-acc__chevron {
+  transform: rotate(180deg);
+}
+.grad-acc__static {
+  padding-left: 20px;
+}
+.grad-acc__panel {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f6f8fb;
+  border: 1px solid #e6ebf2;
+}
+.uni-list__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #697d9f;
+}
+.uni-list__meta b {
+  color: #000;
+}
+.uni-list__search {
+  flex: 0 1 260px;
+  padding: 7px 12px;
+  border: 1px solid #dfe4ed;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+.uni-list__search:focus {
+  border-color: #3e7bb6;
+}
+.uni-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.uni-list__items.is-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+.uni-list__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.uni-list__rank {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #dfe4ed;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3a4a66;
+}
+.uni-list__body {
+  flex: 1;
+  min-width: 0;
+}
+.uni-list__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 15px;
+  color: #000;
+}
+.uni-list__name {
+  min-width: 0;
+}
+.uni-list__count {
+  white-space: nowrap;
+  color: #697d9f;
+  font-size: 14px;
+}
+.uni-list__count b {
+  color: #000;
+}
+.uni-list__badge {
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 20px;
+  background: rgba(25, 174, 139, 0.15);
+  color: #13896d;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.uni-list__bar {
+  height: 6px;
+  margin-top: 5px;
+  border-radius: 6px;
+  background: rgba(105, 125, 159, 0.12);
+  overflow: hidden;
+}
+.uni-list__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: var(--accent);
+}
+.uni-list__item.is-founder .uni-list__bar span {
+  background: #19ae8b;
+}
+.uni-list__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 7px 14px;
+  border: 1px solid #dfe4ed;
+  border-radius: 8px;
+  background: #fff;
+  color: #3e7bb6;
+  font-size: 14px;
+  font-weight: 600;
+}
+.uni-list__more i {
+  font-size: 11px;
+  transition: transform 0.2s ease;
+}
+.uni-list__empty {
+  color: #697d9f;
+  font-size: 14px;
+  margin: 0 !important;
+}
+.age-card__head + .grad-hint {
+  margin: 6px 0 18px !important;
+}
+
+/* Bitiruvchilar kirgan OTMlar va Ta'sischi OTM — bir xil balandlik */
+.grad-groups .grad-rank {
+  flex: 1;
+  justify-content: space-between;
+}
+/* toifa ochilganda o'ng kartochka cho'zilmaydi, yonida qotib turadi */
+.grad-row:has(.grad-acc.is-open) .founder-card {
+  height: auto !important;
+  position: sticky;
+  top: 170px;
+}
+.grad-row:has(.grad-acc.is-open) .grad-groups .grad-rank {
+  justify-content: flex-start;
+}
+
+/* Bog'lanish va manzil */
+.contact-card {
+  padding: 8px 20px !important;
+  justify-content: space-between;
+}
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid #eef1f6;
+}
+.contact-row:last-child {
+  border-bottom: none;
+}
+a.contact-row:hover .contact-row__value {
+  color: #3e7bb6;
+}
+a.contact-row:hover .contact-row__action {
+  opacity: 1;
+  transform: translateX(0);
+}
+.contact-row__icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #e7f1fb;
+  color: #3e7bb6;
+  font-size: 20px;
+}
+.contact-row__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.contact-row__label {
+  font-size: 14px;
+  color: #697d9f;
+}
+.contact-row__value {
+  font-size: 17px;
+  color: #000;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  transition: color 0.15s ease;
+}
+.contact-row__action {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3e7bb6;
+  opacity: 0.55;
+  transform: translateX(-4px);
+  transition: all 0.15s ease;
+}
+.contact-row__action i {
+  font-size: 10px;
+}
+.contact-map {
+  min-height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #dfe4ed;
+  box-shadow: 0 5px 40px 0 rgba(37, 87, 90, 0.08);
+  background: #eef1f6;
+}
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
+}
+@media only screen and (max-width: 576px) {
+  .contact-row__action {
+    display: none;
+  }
+  .contact-map,
+  .contact-map iframe {
+    min-height: 300px;
+  }
+}
+
+/* Ko'rib chiqish tuzatishlari */
+/* asl sayt .content-section__inner p ni "justify" qiladi — bizning kartochkalarda so'zlar orasi cho'zilib ketardi */
+.university .content-section__inner p,
+.university .grad-overview p {
+  text-align: left;
+}
+/* yosh diagrammasi: pastdagi yozuvlar balandligi qat'iy — chapdagi o'q 0 chizig'i bilan mos tushadi */
+.age-chart__labels {
+  height: 30px;
+  align-items: start;
+}
+.age-chart__axis {
+  margin-bottom: 30px;
+}
+@media only screen and (max-width: 576px) {
+  .age-chart__labels {
+    height: 40px;
+  }
+  .age-chart__axis {
+    margin-bottom: 40px;
+  }
+  .age-chart__label {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  .contact-row__value {
+    font-size: 15px;
+  }
+  .teacher-certs__item {
+    padding: 12px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  /* telefonda Davomat kartochkasi siqilmasligi uchun izoh matni yashiriladi (pastdagi "Jami ... darsdan" qoladi) */
+  .attendance-card .teacher-certs__value {
+    display: none;
+  }
+}
+/* planshetda (577–768px) jami/mahalliy/xorijiy bir qatorda qoladi, faqat telefonda ustma-ust */
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+  .grad-overview__stats {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+  .grad-overview__divider {
+    display: block;
+  }
+  .grad-overview__value .teacher-certs__num {
+    font-size: 24px !important;
+  }
+}
+
+/* Toifa strelkasi: katta, aylana tugma ko'rinishida */
+.grad-acc__label {
+  gap: 10px;
+}
+.grad-acc__chevron {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e7f1fb;
+  color: #3e7bb6;
+  font-size: 14px;
+  transition: transform 0.2s ease, background 0.15s ease, color 0.15s ease;
+}
+.grad-acc__toggle:hover .grad-acc__chevron,
+.grad-acc.is-open .grad-acc__chevron {
+  background: #3e7bb6;
+  color: #fff;
+}
+.grad-acc__toggle:focus-visible {
+  outline: 2px solid #3e7bb6;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+/* "OTMga kirmaganlar" qatori strelkasiz — matn boshqa qatorlar bilan tekis turishi uchun */
+.grad-acc__static {
+  padding-left: 38px;
+}

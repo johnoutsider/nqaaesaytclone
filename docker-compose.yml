@@ -1,0 +1,7 @@
+services:
+  nqaae-page:
+    build: .
+    container_name: nqaae-page
+    ports:
+      - "3011:80"
+    restart: unless-stopped
