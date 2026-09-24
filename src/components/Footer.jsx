@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="row">
           <div className="col">
             <a href="" className="footer__logo">
-              <img src="/assets/public/images/agenlik-logo-new.svg" alt="logo" />
+              <img src="assets/public/images/agenlik-logo-new.svg" alt="logo" />
             </a>
             <p className="footer__text mb-3">
               Oʻzbekiston Respublikasi Prezidenti Administratsiyasi huzuridagi Taʼlim sifatini taʼminlash milliy agentligi.

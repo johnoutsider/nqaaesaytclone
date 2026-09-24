@@ -27,6 +27,16 @@ npm install
 npm run dev
 ```
 
+## Oddiy HTML versiya (serversiz)
+
+```bash
+npm install
+npm run build:html
+```
+
+`dist-html/` papkasi hosil bo'ladi — uni istalgan hostingga yuklash yoki `index.html` ni
+kompyuterda ikki marta bosib ochish mumkin. (Xarita va "ko'z" tugmasi uchun sayt serverda ochilgani ma'qul.)
+
 ## Tuzilishi
 
 | Fayl / papka | Vazifasi |

@@ -1,6 +1,6 @@
 import { menu, contacts, socials, SITE } from '../data/menu.js'
 
-const IMG = '/assets/public/images'
+const IMG = 'assets/public/images'
 
 function SubMenu({ items }) {
   return (

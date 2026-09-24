@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import CountUp from './CountUp.jsx'
 
-export const IMG = '/assets/public/images'
+export const IMG = 'assets/public/images'
 export const NA = 'mavjud emas'
 
 // Bo'lim sarlavhasi: nom + sana

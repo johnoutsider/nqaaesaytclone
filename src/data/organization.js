@@ -4,7 +4,7 @@
 export const organization = {
   stir: '205260966',
   name: 'ABU RAYHON BERUNIY NOMIDAGI URGANCH DAVLAT UNIVERSITETI AKADEMIK LITSEYI',
-  logo: '/uploads/litsey-logo.png',
+  logo: 'uploads/litsey-logo.png',
   ownership: 'Davlat',
   region: 'Urganch shahri',
   foundedYear: null,
@@ -114,7 +114,7 @@ export const organization = {
     founder: {
       name: 'Abu Rayhon Beruniy nomidagi Urganch davlat universiteti',
       href: 'https://nqaae.uz/uz/higher/201651846',
-      logo: '/uploads/founder-logo.png',
+      logo: 'uploads/founder-logo.png',
       admitted: 74,
     },
   },
