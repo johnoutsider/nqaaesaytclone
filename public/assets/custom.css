@@ -1384,18 +1384,16 @@ a.contact-row:hover .contact-row__action {
 .gv-a .gv-a__nums p.av-band { background: rgba(62, 123, 182, .12); }
 .gv-a__nums .av-band b { color: #3e7bb6; }
 
-/* Ishlab chiqarish va xizmatlar — variantlar (A–C), tanlovdan keyin bittasi qoladi */
-.pr-variant { position: relative; margin-top: 14px; }
-.pr-variant__tag { position: absolute; top: -12px; right: 16px; z-index: 2; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
-.pr-variant p { text-align: left; margin: 0 !important; }
+/* Ishlab chiqarish va xizmatlar — keng karta + manbalar (tanlangan variant A) */
+.pr-a p { text-align: left; margin: 0 !important; }
+.pr-a .pr-a__label--2 { margin-top: 14px !important; }
+.pr-a__big.pr-a__big--2 b { font-size: 32px; }
 /* A */
 .pr-a { flex-direction: row !important; gap: 32px; align-items: center; }
 .pr-a__left { flex: 0 0 34%; padding-right: 24px; border-right: 1px solid #eef1f6; }
 .pr-a__label { font-size: 14px; color: #697d9f; margin-bottom: 6px !important; }
 .pr-a__big { font-size: 18px; color: #3a4a66; }
 .pr-a__big b { font-size: 46px; font-weight: 700; line-height: 1.05; color: #0a1f44; }
-.pr-a__per { margin-top: 8px !important; font-size: 14px; color: #697d9f; }
-.pr-a__per b { color: #0a1f44; }
 .pr-a__right { flex: 1; min-width: 0; }
 .pr-a__bar { display: flex; gap: 3px; height: 20px; border-radius: 10px; overflow: hidden; background: #eef2f7; }
 .pr-a__bar span { display: block; height: 100%; }
@@ -1404,32 +1402,10 @@ a.contact-row:hover .contact-row__action {
 .pr-a__legend p { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 10px; background: #f7f9fc; font-size: 14px; color: #3a4a66; }
 .pr-a__legend i { width: 10px; height: 10px; border-radius: 3px; }
 .pr-a__legend b { margin-left: auto; color: #0a1f44; }
-/* B */
-.pr-b { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.pr-b__tile { display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 12px; background: #fff; border: 1px solid #dfe4ed; box-shadow: 0 5px 40px 0 rgba(37, 87, 90, .08); }
-.pr-b__tile .teacher-certs__icon { --accent: #3e7bb6; align-self: flex-start; }
-.pr-b__tile.is-main { background: linear-gradient(270deg, #19ae8b 0, #23939f 50%, #3e7bb6 100%); border: none; }
-.pr-b__tile.is-main .teacher-certs__icon { background: rgba(255, 255, 255, .2); }
-.pr-b__label { font-size: 14px; color: #697d9f; }
-.pr-b__num { font-size: 15px; color: #3a4a66; }
-.pr-b__num b { font-size: 32px; font-weight: 700; color: #0a1f44; }
-.pr-b__tile.is-main .pr-b__label, .pr-b__tile.is-main .pr-b__num, .pr-b__tile.is-main .pr-b__num b { color: #fff; }
-/* C */
-.pr-c { flex-direction: row !important; align-items: center; gap: 20px; border: 1px dashed #c9d3e3 !important; background: #f9fbfd; }
-.pr-c.is-on { border-style: solid !important; background: #fff; }
-.pr-c__icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 16px; background: #eef2f7; color: #9aa6ba; font-size: 28px; font-weight: 700; }
-.pr-c.is-on .pr-c__icon { background: #19ae8b; color: #fff; }
-.pr-c__title { font-size: 18px; font-weight: 600; color: #0a1f44; }
-.pr-c__sub { margin-top: 4px !important; font-size: 14px; color: #697d9f; }
-.pr-c__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.pr-c__chips span { padding: 5px 12px; border-radius: 20px; background: #eef2f7; font-size: 13px; color: #697d9f; }
-.pr-c__chips b { color: #0a1f44; }
 @media only screen and (max-width: 991px) {
-  .pr-b { grid-template-columns: repeat(2, 1fr); }
   .pr-a { flex-direction: column !important; align-items: stretch; }
   .pr-a__left { padding-right: 0; border-right: none; }
 }
 @media only screen and (max-width: 576px) {
   .pr-a__legend { grid-template-columns: 1fr; }
-  .pr-c { flex-direction: column !important; align-items: flex-start; }
 }
