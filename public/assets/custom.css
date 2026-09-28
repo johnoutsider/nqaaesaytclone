@@ -1420,6 +1420,7 @@ a.contact-row:hover .contact-row__action {
 }
 
 /* Bog'lanish: bitta "Telefon raqam" qatorida bir nechta raqam ustma-ust */
-.contact-row__phone { display: block; color: inherit; text-decoration: none; }
-.contact-row__phone + .contact-row__phone { margin-top: 2px; }
-.contact-row__phone:hover { color: #3e7bb6; }
+.contact-row__phone { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: inherit; text-decoration: none; }
+.contact-row__phone + .contact-row__phone { margin-top: 4px; }
+.contact-row__phone:hover .contact-row__value { color: #3e7bb6; }
+.contact-row__phone:hover .contact-row__action { opacity: 1; transform: translateX(0); }
