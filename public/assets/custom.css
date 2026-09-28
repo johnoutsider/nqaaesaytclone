@@ -1339,3 +1339,13 @@ a.contact-row:hover .contact-row__action {
   .gv-a__bars { grid-template-columns: 1fr 44px; }
   .gv-a__label { grid-column: 1 / -1; white-space: normal; }
 }
+
+/* Bitiruvchilar halqasi: yuqoriga ko'tarilgan, ostida jami va band — katta raqamlar */
+.gv-a { align-items: flex-start !important; }
+.gv-a__ring { padding-top: 4px; }
+.gv-a__nums { display: flex; gap: 10px; margin-top: 14px; }
+.gv-a .gv-a__nums p { display: flex; flex-direction: column; align-items: center; min-width: 92px; margin: 0 !important; padding: 10px 12px; border-radius: 12px; background: #f3f5f9; text-align: center; }
+.gv-a__nums b { font-size: 28px; font-weight: 700; line-height: 1.1; color: #0a1f44; }
+.gv-a__nums span { font-size: 12px; line-height: 1.25; color: #697d9f; }
+.gv-a .gv-a__nums p.is-band { background: rgba(25, 174, 139, .12); }
+.gv-a__nums .is-band b { color: #19ae8b; }

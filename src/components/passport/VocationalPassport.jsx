@@ -409,7 +409,10 @@ function GradRing({ d, popular }) {
           </svg>
           <div className="gv-a__center"><b>{pct(band, B)}%</b><span>band</span></div>
         </div>
-        <p className="gv-a__caption"><b>{fmt(band)}</b> / {fmt(B)} bitiruvchi band</p>
+        <div className="gv-a__nums">
+          <p><b>{fmt(B)}</b><span>Jami bitiruvchilar</span></p>
+          <p className="is-band"><b>{fmt(band)}</b><span>Band bitiruvchilar</span></p>
+        </div>
       </div>
       <div className="gv-a__bars">
         <h2 className="university-bars--title"><img src={`${IMG}/university-direction.svg`} alt="" /> Bitiruvchilar qayerda?</h2>
