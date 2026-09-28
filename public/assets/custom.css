@@ -1256,38 +1256,7 @@ a.contact-row:hover .contact-row__action {
 .program-list .uni-list__bar { height: 8px; }
 #talim-dasturlari { scroll-margin-top: 170px; }
 
-/* Ta'lim dasturlari — ko'rinish variantlari (A–D), tanlovdan keyin bittasi qoladi */
-.pv-variant { position: relative; }
-.pv-variant__tag { position: absolute; top: -12px; right: 16px; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
-/* A */
-.pv-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
-.pv-card { padding: 14px 16px; border-radius: 12px; background: #f7f9fc; border-top: 4px solid var(--c); }
-.pv-card p { margin: 0 !important; text-align: left; }
-.pv-card__name { min-height: 2.6em; font-size: 15px; font-weight: 600; color: #0a1f44; line-height: 1.3; }
-.pv-card__num { margin-top: 6px !important; color: #3a4a66; font-size: 14px; }
-.pv-card__num b { font-size: 28px; font-weight: 700; color: var(--c); }
-.pv-card__num span { margin-left: 6px; padding: 1px 8px; border-radius: 10px; background: #fff; color: #697d9f; font-size: 12px; }
-.pv-card__courses { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.pv-card__courses span { padding: 2px 8px; border-radius: 10px; background: #fff; color: #697d9f; font-size: 12px; }
-.pv-card__courses b { color: #0a1f44; }
-/* B */
-.pv-bars { display: flex; flex-direction: column; gap: 10px; }
-.pv-bars__row { display: grid; grid-template-columns: 240px 1fr 48px; align-items: center; gap: 12px; }
-.pv-bars__name { font-size: 15px; color: #0a1f44; }
-.pv-bars__track { height: 28px; border-radius: 8px; background: #f1f4f8; }
-.pv-bars__fill { display: flex; align-items: center; justify-content: flex-end; height: 100%; min-width: 36px; padding: 0 8px; border-radius: 8px; color: #fff; font-size: 13px; font-weight: 700; }
-.pv-bars__pct { text-align: right; color: #697d9f; font-size: 14px; }
-/* C */
-.pv-table-wrap { overflow-x: auto; }
-.pv-table { width: 100%; border-collapse: collapse; font-size: 15px; }
-.pv-table th, .pv-table td { padding: 10px 12px; border-bottom: 1px solid #eef1f6; text-align: right !important; }
-.pv-table th:first-child, .pv-table td:first-child { text-align: left !important; }
-.pv-table th { color: #697d9f; font-weight: 500; font-size: 13px; }
-.pv-table td { color: #0a1f44; }
-.pv-table td.is-empty { color: #b3bccb; }
-.pv-table tbody tr:hover { background: #f7f9fc; }
-.pv-table tfoot td { background: #f3f7fb; font-weight: 700; color: #3e7bb6; border-bottom: none; }
-/* D */
+/* Ta'lim dasturlari — ulushlar chizig'i (tanlangan variant D) */
 .pv-share__bar { display: flex; gap: 2px; height: 22px; border-radius: 10px; overflow: hidden; }
 .pv-share__bar span { display: block; height: 100%; }
 .pv-share__legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px 24px; margin-top: 16px; }
@@ -1295,7 +1264,3 @@ a.contact-row:hover .contact-row__action {
 .pv-share__item i { flex-shrink: 0; align-self: center; width: 12px; height: 12px; border-radius: 4px; }
 .pv-share__name { flex: 1; }
 .pv-share__item small { width: 38px; text-align: right; color: #697d9f; }
-@media only screen and (max-width: 768px) {
-  .pv-bars__row { grid-template-columns: 1fr 44px; }
-  .pv-bars__name { grid-column: span 2; font-size: 14px; }
-}
