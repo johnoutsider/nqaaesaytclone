@@ -1425,12 +1425,7 @@ a.contact-row:hover .contact-row__action {
 .contact-row__phone:hover .contact-row__value { color: #3e7bb6; }
 .contact-row__phone:hover .contact-row__action { opacity: 1; transform: translateX(0); }
 
-/* VAQTINCHA: malaka toifasi ulushi variantlari */
-.qo-variant { position: relative; margin-top: 14px; }
-.qo-variant__tag { position: absolute; top: -12px; right: 16px; z-index: 2; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
-.grad-overview__value .grad-overview__pct { align-self: center; margin-left: 4px; }
-.qo-ring { position: relative; flex-shrink: 0; width: 64px; height: 64px; margin-left: auto; }
-.qo-ring b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #3e7bb6; }
+/* Pedagoglar: malaka toifasi ulushi chizig'i */
 .grad-overview__stat > div:nth-child(2) { min-width: 0; flex: 1; }
 .qo-bar { margin-top: 8px; }
 .qo-bar__track { height: 8px; max-width: 360px; border-radius: 8px; background: #e8edf4; overflow: hidden; }
