@@ -1305,3 +1305,8 @@ a.contact-row:hover .contact-row__action {
 @media only screen and (max-width: 768px) {
   .cv-compact { flex-direction: column; align-items: stretch; }
 }
+
+/* Kurslar: foiz ustun ichida — katta, oq, aniq ko'rinadi */
+.cv-col__track i { display: flex; align-items: flex-start; justify-content: center; min-height: 34px; }
+.cv-col__pct { margin-top: 10px; color: #fff; font-style: normal; font-size: 20px; font-weight: 700; line-height: 1; }
+.cv-col__val small { font-size: 13px; }

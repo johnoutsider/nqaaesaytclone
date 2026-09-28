@@ -268,9 +268,11 @@ function CoursesColumns() {
       <div className="cv-cols">
         {entries.map(([k, v], i) => (
           <div key={k} className="cv-col">
-            <span className="cv-col__val">{fmt(v)} <small>{pct(v, programs.total)}%</small></span>
+            <span className="cv-col__val">{fmt(v)} <small>nafar</small></span>
             <div className="cv-col__track">
-              <i style={{ height: `${(v / max) * 100}%`, background: COURSE_COLORS[i] }}></i>
+              <i style={{ height: `${(v / max) * 100}%`, background: COURSE_COLORS[i] }}>
+                <em className="cv-col__pct">{pct(v, programs.total)}%</em>
+              </i>
             </div>
             <span className="cv-col__label">{k}-kurs</span>
           </div>
