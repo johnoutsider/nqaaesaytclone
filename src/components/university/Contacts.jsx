@@ -7,7 +7,10 @@ const mapSrc = (d) =>
     ? `https://yandex.uz/map-widget/v1/?ll=${d.mapPoint.join('%2C')}&pt=${d.mapPoint.join('%2C')},pm2rdm&z=16`
     : `https://yandex.uz/map-widget/v1/?text=${encodeURIComponent(d.mapQuery || d.address)}&z=15`
 
-const mapLink = (d) => `https://yandex.uz/maps/?text=${encodeURIComponent(d.mapQuery || d.address)}`
+const mapLink = (d) =>
+  d.mapPoint
+    ? `https://yandex.uz/maps/?pt=${d.mapPoint.join('%2C')}&z=17&l=map`
+    : `https://yandex.uz/maps/?text=${encodeURIComponent(d.mapQuery || d.address)}`
 
 function ContactRow({ icon, label, value, href, action, external }) {
   const Tag = href ? 'a' : 'div'
@@ -27,8 +30,8 @@ function ContactRow({ icon, label, value, href, action, external }) {
 }
 
 export default function Contacts({ data }) {
-  const tel = data.phone.replace(/[^\d+]/g, '')
-  const site = data.website.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  const phones = [].concat(data.phone || [])
+  const site = data.website?.replace(/^https?:\/\//, '').replace(/\/$/, '')
 
   return (
     <div>
@@ -36,8 +39,11 @@ export default function Contacts({ data }) {
       <div className="row mb-3 contacts-block">
         <div className="col-lg-5 mb-3 mb-lg-0">
           <div className="content-section__inner h-100 contact-card">
-            <ContactRow icon="i-phone" label="Telefon raqam" value={data.phone} href={`tel:${tel}`} action="Qo'ng'iroq" />
-            <ContactRow icon="i-web" label="Rasmiy veb-sayt" value={site} href={data.website} action="Ochish" external />
+            {phones.map((p) => (
+              <ContactRow key={p} icon="i-phone" label="Telefon raqam" value={p} href={`tel:${p.replace(/[^\d+]/g, '')}`} action="Qo'ng'iroq" />
+            ))}
+            {site && <ContactRow icon="i-web" label="Rasmiy veb-sayt" value={site} href={data.website} action="Ochish" external />}
+            {data.basis && <ContactRow icon="i-docs" label="Tashkil etilish asosi" value={data.basis} />}
             <ContactRow icon="i-email" label="Elektron manzil" value={data.email} href={`mailto:${data.email}`} action="Yozish" />
             <ContactRow icon="i-location" label="Yuridik manzil" value={data.address} href={mapLink(data)} action="Xaritada" external />
           </div>

@@ -1,4 +1,4 @@
-import { IMG, SectionTop } from './common.jsx'
+import { IMG, NA, SectionTop } from './common.jsx'
 
 function InfraItem({ value, label }) {
   return (
@@ -8,7 +8,7 @@ function InfraItem({ value, label }) {
           <img src={`${IMG}/university-building.svg`} alt="" />
         </div>
         <div className="university-infra-item-content">
-          <p className="university-infra-item-content-title ">{value}</p>
+          <p className="university-infra-item-content-title ">{value ?? NA}</p>
           <p className="university-infra-item-content-desc">{label}</p>
         </div>
         <div className="university-infra-item-effect">

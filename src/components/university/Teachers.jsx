@@ -1,4 +1,4 @@
-import { IMG, SectionTop, OverviewCard } from './common.jsx'
+import { IMG, NA, SectionTop, OverviewCard } from './common.jsx'
 import { CertItem } from './PeopleCertificates.jsx'
 
 // O'zgarish: Pedagoglar bo'limi qayta tuzildi —
@@ -7,29 +7,36 @@ import { CertItem } from './PeopleCertificates.jsx'
 // 3) sertifikatlar + malaka oshirish va stajirovka bitta kartochkada.
 
 const pct = (part, whole) => (whole > 0 ? Math.round((part / whole) * 100) : 0)
-const QUAL_COLORS = ['#7161FF', '#19AE8B', '#FFA151', '#B3BCCB']
+const QUAL_COLORS = ['#7161FF', '#19AE8B', '#FFA151', '#B3BCCB', '#4E95DA', '#E187FF']
 
-function Qualification({ items, total }) {
+// Toifalar bo'yicha taqsimot: bo'lingan chiziq + son va foiz ro'yxati (null => "mavjud emas")
+export function BreakdownCard({ title = 'Malaka toifasi', items, total, colors = QUAL_COLORS }) {
   return (
     <div className="content-section__inner h-100">
       <h2 className="university-bars--title">
         <img src={`${IMG}/university-direction.svg`} alt="" />
-        Malaka toifasi
+        {title}
       </h2>
       <div className="qual-split">
         {items.map((q, i) =>
           q.value > 0 ? (
-            <span key={q.key} style={{ width: `${pct(q.value, total)}%`, background: QUAL_COLORS[i] }}></span>
+            <span key={q.key} style={{ width: `${pct(q.value, total)}%`, background: colors[i % colors.length] }}></span>
           ) : null
         )}
       </div>
       <div className="qual-list">
         {items.map((q, i) => (
           <div key={q.key} className="qual-list__row">
-            <i style={{ background: QUAL_COLORS[i] }}></i>
+            <i style={{ background: colors[i % colors.length] }}></i>
             <span className="qual-list__name">{q.key}</span>
-            <span className="qual-list__count"><b>{q.value}</b> nafar</span>
-            <span className="qual-list__pct">{pct(q.value, total)}%</span>
+            {q.value == null ? (
+              <span className="qual-list__count">{NA}</span>
+            ) : (
+              <>
+                <span className="qual-list__count"><b>{q.value}</b> nafar</span>
+                <span className="qual-list__pct">{pct(q.value, total)}%</span>
+              </>
+            )}
           </div>
         ))}
       </div>
@@ -83,10 +90,16 @@ function niceScale(maxValue) {
   return { top, ticks }
 }
 
-function AgeStructure({ items, total, sample }) {
+// summary: o'ngdagi xulosalar — items[from..to) yig'indisi
+const LYCEUM_AGE_SUMMARY = [
+  { label: '35 yoshgacha yosh pedagoglar', from: 0, to: 2, variant: 'young' },
+  { label: '56 yosh va undan katta', from: -2, variant: 'senior' },
+]
+
+export function AgeStructure({ items, total, sample, avgAge, summary = LYCEUM_AGE_SUMMARY }) {
   const { top, ticks } = niceScale(Math.max(...items.map((a) => a.value), 1))
-  const young = items.slice(0, 2).reduce((s, a) => s + a.value, 0) // 35 yoshgacha
-  const senior = items.slice(-2).reduce((s, a) => s + a.value, 0) // 56 va undan katta
+  const cols = { gridTemplateColumns: `repeat(${items.length}, 1fr)` }
+  const sumOf = (sm) => items.slice(sm.from, sm.to).reduce((s, a) => s + a.value, 0)
   return (
     <div className="content-section__inner mb-3">
       <div className="age-card__head">
@@ -94,7 +107,10 @@ function AgeStructure({ items, total, sample }) {
           <img src={`${IMG}/university-direction.svg`} alt="" />
           Yosh tarkibi
         </h2>
-        {sample && <span className="age-card__sample">Taxminiy ma'lumot</span>}
+        <div className="d-flex align-items-center gap-2">
+          {avgAge != null && <span className="age-card__avg">O'rtacha yosh: <b>{avgAge}</b></span>}
+          {sample && <span className="age-card__sample">Taxminiy ma'lumot</span>}
+        </div>
       </div>
       <div className="age-card__body">
         <div className="age-chart">
@@ -106,7 +122,7 @@ function AgeStructure({ items, total, sample }) {
             ))}
           </div>
           <div className="age-chart__main">
-            <div className="age-chart__plot">
+            <div className="age-chart__plot" style={cols}>
               {ticks.map((t) => (
                 <span key={t} className={`age-chart__grid ${t === 0 ? 'is-base' : ''}`} style={{ bottom: `${(t / top) * 100}%` }}></span>
               ))}
@@ -118,7 +134,7 @@ function AgeStructure({ items, total, sample }) {
                 </div>
               ))}
             </div>
-            <div className="age-chart__labels">
+            <div className="age-chart__labels" style={cols}>
               {items.map((a) => (
                 <span key={a.label} className="age-chart__label">{a.label}</span>
               ))}
@@ -126,14 +142,12 @@ function AgeStructure({ items, total, sample }) {
           </div>
         </div>
         <div className="age-card__summary">
-          <div className="age-card__stat age-card__stat--young">
-            <span>35 yoshgacha yosh pedagoglar</span>
-            <p><b>{young}</b> nafar <em>{pct(young, total)}%</em></p>
-          </div>
-          <div className="age-card__stat age-card__stat--senior">
-            <span>56 yosh va undan katta</span>
-            <p><b>{senior}</b> nafar <em>{pct(senior, total)}%</em></p>
-          </div>
+          {summary.map((sm) => (
+            <div key={sm.label} className={`age-card__stat age-card__stat--${sm.variant}`}>
+              <span>{sm.label}</span>
+              <p><b>{sumOf(sm)}</b> nafar <em>{pct(sumOf(sm), total)}%</em></p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -179,7 +193,7 @@ export default function Teachers({ data }) {
 
       <div className="row">
         <div className="col-lg-7 mb-3">
-          <Qualification items={data.qualification} total={data.total} />
+          <BreakdownCard items={data.qualification} total={data.total} />
         </div>
         <div className="col-lg-5 mb-3">
           <Degrees items={data.degrees} total={data.total} />

@@ -41,14 +41,21 @@ function SurveyGroup({ group }) {
       <div className="question">
         <div>
           <h5 className="mb-2">{group.title}</h5>
-          <p className="soon">11232131311311212</p>
+          {group.items.length ? (
+            <p className="survey-summary">
+              {group.items.length} ta savol · o'rtacha ijobiy javob{' '}
+              <b>{Math.round(group.items.reduce((s, d) => s + d.positive, 0) / group.items.length)}%</b>
+            </p>
+          ) : (
+            <p className="soon">11232131311311212</p>
+          )}
         </div>
         <span className="i-close"></span>
       </div>
       <div className="answer" ref={answerRef} style={{ maxHeight }}>
         <div className="row w-100">
-          {group.items.map((d) => (
-            <div key={d.question} className="col-lg-4 col-md-6">
+          {group.items.map((d, i) => (
+            <div key={i} className="col-lg-4 col-md-6 mb-3">
               <div className="content-section__inner h-100">
                 <div className="content-section__top alt line-fix-3 mb-auto">{d.question}</div>
                 <div className="row align-items-center mt-5">

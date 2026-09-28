@@ -1180,3 +1180,66 @@ a.contact-row:hover .contact-row__action {
 .grad-acc__static {
   padding-left: 38px;
 }
+
+/* ===== Texnikum pasporti (#/texnikum) ===== */
+.age-card__avg {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #e7f1fb;
+  color: #3e7bb6;
+  font-size: 13px;
+}
+.age-card__avg b {
+  font-size: 15px;
+}
+/* ikki qismli ko'rsatkich (grant/kontrakt, 9/11-sinf) */
+.split-card__nums {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.split-card__num {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border-left: 4px solid var(--accent);
+  background: #f6f8fb;
+}
+.split-card__num span {
+  font-size: 13px;
+  color: #697d9f;
+}
+.split-card__num p {
+  font-size: 14px;
+  color: #3a4a66;
+}
+.split-card__num b {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000;
+}
+.split-card__num em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--accent);
+  margin-left: 4px;
+}
+.dual-card .degree-card__main b,
+.dual-card .degree-card__main em {
+  color: #19ae8b;
+}
+.dual-card .degree-card__bar {
+  --accent: #19ae8b;
+}
+.competition-card__main b {
+  white-space: nowrap;
+}
+/* so'rovnoma guruhi xulosasi */
+.survey-summary {
+  color: #697d9f;
+  font-size: 15px;
+  margin: 0 !important;
+}
+.survey-summary b {
+  color: #3c878c;
+}

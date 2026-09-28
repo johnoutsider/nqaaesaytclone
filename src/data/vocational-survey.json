@@ -1,0 +1,192 @@
+[
+  {
+    "title": "Professor-o'qituvchilar",
+    "items": [
+      {
+        "question": "Siz ishlayotgan taʼlim tashkilotida dars o‘tish uchun moddiy-texnik baza (auditoriya holati, jihozlar, laboratoriyalar) qanday darajada taʼminlangan?",
+        "positive": 92.5,
+        "negative": 7.5
+      },
+      {
+        "question": "Siz dars beradigan yo‘nalishda laboratoriya va ustaxonalar zamonaviy texnika va asbob-uskunalar bilan qay darajada taʼminlangan?",
+        "positive": 90,
+        "negative": 10
+      },
+      {
+        "question": "Taʼlim tashkiloti faoliyatini yanada yaxshilash uchun birinchi navbatda nimalarni o‘zgartirish kerak deb hisoblaysiz?",
+        "positive": 75,
+        "negative": 25
+      },
+      {
+        "question": "Siz o‘qitayotgan fan dasturlari va o‘quv materiallari bugungi mehnat bozori va ish beruvchilarning real talablariga qanchalik mos deb hisoblaysiz?",
+        "positive": 97.5,
+        "negative": 2.5
+      },
+      {
+        "question": "Siz o‘qitayotgan fan dasturlari va o‘quv materiallari bugungi mehnat bozori va ish beruvchilarning real talablariga qanchalik mos deb hisoblaysiz?",
+        "positive": 95,
+        "negative": 5
+      },
+      {
+        "question": "Darslarda kompyuter texnologiyalari qulayligi va Internet tezligidan qoniqish darajangizni baholang?",
+        "positive": 92.5,
+        "negative": 7.5
+      },
+      {
+        "question": "Siz dars berayotgan soha bo‘yicha bevosita ishlab chiqarishda (korxonada) ish tajribasiga egamisiz?",
+        "positive": 67.5,
+        "negative": 32.5
+      },
+      {
+        "question": "Taʼlim tashkilotlarida ish yuklamangiz (dars soatlari va hujjatbozlik) miqdorini qanday baholaysiz?",
+        "positive": 52.5,
+        "negative": 47.5
+      },
+      {
+        "question": "o‘zingizning kasbiy malakangizni xalqaro talablarga mos deb hisoblaysizmi?",
+        "positive": 100,
+        "negative": 0
+      },
+      {
+        "question": "Oxirgi 2-yil ichida ishlab chiqarish korxonalarida malaka oshirish yoki stajirovkadan o‘tdingizmi?",
+        "positive": 85,
+        "negative": 15
+      },
+      {
+        "question": "Ishlab chiqarish taʼlim ustalarining ish haqi va moddiy rag‘batlantirilishi ularni sifatli taʼlim berishga undaydimi?",
+        "positive": 80,
+        "negative": 20
+      },
+      {
+        "question": "Texnikumda o'quv jarayonini tashkil etishda mehnat bozori bilan bog'liq ta'minlangan deb hisoblaysizmi?",
+        "positive": 97.5,
+        "negative": 2.5
+      },
+      {
+        "question": "Texnikumga o‘quvchilarni qabul qilish talablari (kvotalar) hududiy ish beruvchilar ehtiyojlariga qanchalik mos keladi?",
+        "positive": 97.5,
+        "negative": 2.5
+      },
+      {
+        "question": "Texnikum tomonidan ish beruvchilar (korxona va tashkilotlar) bilan o‘quvchilarni ishga joylashtirish bo‘yicha hamkorlik darajasini baholang?",
+        "positive": 92.5,
+        "negative": 7.5
+      },
+      {
+        "question": "O‘quvchilarning darsda olgan nazariy bilimlarini bevosita ishlab chiqarishda (korxonalarda) mustahkamlash (dual taʼlim) uchun sharoitlar yetarlimi?",
+        "positive": 90,
+        "negative": 10
+      },
+      {
+        "question": "Sizningcha, o‘quvchilarning tanlagan kasbi bo‘yicha bilim va ko‘nikmalarini shakllantirishda eng asosiy to‘siq nimada?",
+        "positive": 90,
+        "negative": 10
+      },
+      {
+        "question": "Sizning texnikumingizda pedagoglar va ishlab chiqarish taʼlim ustalarini chet elga malaka oshirish va stajirovkaga yuborish tizimi qanday ishlaydi?",
+        "positive": 37.5,
+        "negative": 62.5
+      },
+      {
+        "question": "Hamkor korxonalar o‘quvchilarning ishlab chiqarish amaliyotiga qanchalik masʼuliyat bilan yondashmoqda?",
+        "positive": 90,
+        "negative": 10
+      }
+    ]
+  },
+  {
+    "title": "Talabalar",
+    "items": [
+      {
+        "question": "Oʻqituvchi va ishlab chiqarish taʼlimi ustalarining kasbiy mahorati sizni qoniqtiradimi?",
+        "positive": 97.7,
+        "negative": 2.3
+      },
+      {
+        "question": "Oʻquv adabiyotlari, darsliklar va kutubxona (jumladan, elektron resurslar) bilan taʼminlanganlik darajasi sizni qoniqtiradimi?",
+        "positive": 96.1,
+        "negative": 3.9
+      },
+      {
+        "question": "Sizning texnikumingizda o‘qitish tizimi kredit-modul tizimiga asoslanganmi?",
+        "positive": 94.9,
+        "negative": 5.1
+      },
+      {
+        "question": "Tanlagan kasbingizni oʻrganish uchun oʻtkaziladigan amaliy mashgʻulotlar (amaliyot darslari) sifatini qanday baholaysiz?",
+        "positive": 95.5,
+        "negative": 4.5
+      },
+      {
+        "question": "Taʼlim tashkiotidagi oʻquv ustaxonalari va laboratoriyalarning jihozlanish darajasini qanday baholaysiz?",
+        "positive": 86.5,
+        "negative": 13.5
+      },
+      {
+        "question": "Amaliy mashgʻulotlar uchun zarur boʻlgan xomashyo va materiallar (metall, mato, kimyoviy moddalar va h.k.) bilan taʼminlanish darajasi qanday?",
+        "positive": 95.1,
+        "negative": 4.9
+      },
+      {
+        "question": "Oʻquv dasturidagi nazariya va amaliyot mashgʻulotlari nisbati sizningcha qanday?",
+        "positive": 58.5,
+        "negative": 41.5
+      },
+      {
+        "question": "Ishlab chiqarish amaliyotini qayerda oʻtayapsiz (yoki oʻtagansiz)?",
+        "positive": 95.5,
+        "negative": 4.5
+      },
+      {
+        "question": "Amaliyot oʻtayotgan korxonangizda Sizga zamonaviy texnologiyalarni oʻrgatish uchun sharoit yaratilganmi?",
+        "positive": 98.1,
+        "negative": 1.9
+      },
+      {
+        "question": "Dual taʼlim (ham oʻqish, ham ishlash) tizimi haqida maʼlumotga egamisiz va bu tizimda ishtirok etayapsizmi?",
+        "positive": 58.4,
+        "negative": 41.6
+      },
+      {
+        "question": "Taʼlim tashkilotida tadbirkorlikka oʻrgatish (startap loyihalar) yoʻlga qoʻyilganmi?",
+        "positive": 78.2,
+        "negative": 21.8
+      },
+      {
+        "question": "Kasbiy taʼlim sifatini 5 ballik tizimda baholang",
+        "positive": 95.3,
+        "negative": 4.7
+      },
+      {
+        "question": "Darsdan boʻsh vaqtingizda taʼlim tashkilotida faoliyat yuritadigan toʻgaraklar (kasb-hunar, fan toʻgaraklari) sizning qiziqishlaringizga mos keladimi?",
+        "positive": 76.3,
+        "negative": 23.7
+      },
+      {
+        "question": "Taʼlim tashkilotida muntazam ravishda sport bilan shugʻullanish uchun yaratilgan sharoitlardan (sport zali, maydonchalar, inventarlar) qoniqish darajangiz qanday?",
+        "positive": 92.1,
+        "negative": 7.9
+      },
+      {
+        "question": "Taʼlim tashkilotida oʻtkaziladigan maʼnaviy-maʼrifiy tadbirlar, uchrashuvlar va koʻrik-tanlovlar siz uchun qiziqarlimi?",
+        "positive": 86.5,
+        "negative": 13.5
+      },
+      {
+        "question": "Oʻqishni tamomlaganingizdan soʻng, oʻz mutaxassisligingiz boʻyicha tez va qiynalmasdan ish topishingizga ishonasizmi?",
+        "positive": 97.5,
+        "negative": 2.5
+      },
+      {
+        "question": "Oʻqish davrida mutaxassisligingiz boʻyicha real korxona yoki tashkilotlarda ishlab chiqarish amaliyotini oʻtadingizmi va u sizga foydali boʻldimi?",
+        "positive": 78.3,
+        "negative": 21.7
+      },
+      {
+        "question": "Taʼlim tashkilotingiz sizga ish topishda (boʻsh ish oʻrinlari yarmarkalari, ish beruvchilar bilan uchrashuvlar orqali) qanday darajada amaliy yordam bermoqda?",
+        "positive": 75.3,
+        "negative": 24.7
+      }
+    ]
+  }
+]
