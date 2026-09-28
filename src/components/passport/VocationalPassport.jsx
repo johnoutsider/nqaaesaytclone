@@ -457,22 +457,116 @@ function Graduates({ d }) {
   )
 }
 
+// Ishlab chiqarish va xizmatlar: o'quvchilar mahsulot va xizmatlaridan tushum (K3.2).
+// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+// Katta summalar "mln so'm" / "mlrd so'm" ko'rinishida.
+function somShort(v) {
+  if (v >= 1e9) return [String((v / 1e9).toFixed(1)).replace('.', ','), "mlrd so'm"]
+  if (v >= 1e6) return [String((v / 1e6).toFixed(1)).replace('.', ','), "mln so'm"]
+  return [fmt(v), "so'm"]
+}
+
+function prodData(d) {
+  const [O, davlat, boshqa] = d['K3.2']
+  const total = davlat + boshqa
+  return { O, davlat, boshqa, total, perStudent: O ? total / O : 0 }
+}
+
+// A — bitta keng karta: chapda jami tushum (katta), o'ngda manbalar bo'yicha taqsimot chizig'i
+function ProdWide({ d }) {
+  const { davlat, boshqa, total, perStudent } = prodData(d)
+  const [tv, tu] = somShort(total)
+  const [pv, pu] = somShort(perStudent)
+  return (
+    <div className="content-section__inner mb-3 pr-a">
+      <div className="pr-a__left">
+        <p className="pr-a__label">Jami tushum</p>
+        <p className="pr-a__big"><b>{tv}</b> {tu}</p>
+        <p className="pr-a__per">Bir o'quvchiga: <b>{pv}</b> {pu}</p>
+      </div>
+      <div className="pr-a__right">
+        <p className="pr-a__label">Tushum manbalari</p>
+        <div className="pr-a__bar">
+          {total > 0 ? (
+            <>
+              <span style={{ width: `${(davlat / total) * 100}%`, background: '#3E7BB6' }}></span>
+              <span style={{ width: `${(boshqa / total) * 100}%`, background: '#19AE8B' }}></span>
+            </>
+          ) : (
+            <span className="is-empty">Hozircha tushum qayd etilmagan</span>
+          )}
+        </div>
+        <div className="pr-a__legend">
+          <p><i style={{ background: '#3E7BB6' }}></i>Davlat xaridlari<b>{somShort(davlat).join(' ')}</b></p>
+          <p><i style={{ background: '#19AE8B' }}></i>Boshqa tushumlar<b>{somShort(boshqa).join(' ')}</b></p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// B — uchta ko'rsatkich plitkasi (jami, davlat xaridlari, boshqa) + bir o'quvchiga
+function ProdTiles({ d }) {
+  const { davlat, boshqa, total, perStudent } = prodData(d)
+  const tiles = [
+    { label: 'Jami tushum', v: total, cls: 'is-main', icon: 'university-stat-1.svg' },
+    { label: 'Davlat xaridlari', v: davlat, icon: 'vocational-stat-1.svg' },
+    { label: 'Boshqa tushumlar', v: boshqa, icon: 'vocational-stat-2.svg' },
+    { label: "Bir o'quvchiga", v: perStudent, icon: 'university-staff-1.svg' },
+  ]
+  return (
+    <div className="pr-b mb-3">
+      {tiles.map((t) => {
+        const [v, u] = somShort(t.v)
+        return (
+          <div key={t.label} className={`pr-b__tile ${t.cls || ''}`}>
+            <div className="teacher-certs__icon"><img src={`${IMG}/${t.icon}`} alt="" /></div>
+            <p className="pr-b__label">{t.label}</p>
+            <p className="pr-b__num"><b>{v}</b> {u}</p>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+// C — holatga qarab: tushum bo'lsa — summalar; bo'lmasa — tushunarli "hali yo'q" kartasi va nima hisoblanishi
+function ProdStatus({ d }) {
+  const { davlat, boshqa, total, perStudent } = prodData(d)
+  return (
+    <div className={`content-section__inner mb-3 pr-c ${total ? 'is-on' : ''}`}>
+      <div className="pr-c__icon">{total ? '✓' : '—'}</div>
+      <div className="pr-c__body">
+        {total ? (
+          <>
+            <p className="pr-c__title">O'quvchilar mahsulot va xizmatlaridan <b>{somShort(total).join(' ')}</b> tushum</p>
+            <p className="pr-c__sub">Bir o'quvchiga {somShort(perStudent).join(' ')}</p>
+          </>
+        ) : (
+          <>
+            <p className="pr-c__title">Hozircha tushum qayd etilmagan</p>
+            <p className="pr-c__sub">O'quvchilar ishlab chiqargan mahsulot va ko'rsatgan xizmatlardan tushgan mablag' shu yerda ko'rsatiladi.</p>
+          </>
+        )}
+        <div className="pr-c__chips">
+          <span>Davlat xaridlari: <b>{somShort(davlat).join(' ')}</b></span>
+          <span>Boshqa tushumlar: <b>{somShort(boshqa).join(' ')}</b></span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Production({ d }) {
-  const [, davlat, boshqa] = d['K3.2']
   return (
     <div>
       <SectionTop title="Ishlab chiqarish va xizmatlar" date={passport.date} />
-      <div className="row">
-        <div className="col-lg-6 mb-3">
-          <FactList
-            title="O‘quvchilar mahsulot va xizmatlaridan tushum"
-            rows={[
-              { label: 'Davlat xaridlari', value: fmt(davlat), unit: "so'm" },
-              { label: 'Boshqa tushumlar', value: fmt(boshqa), unit: "so'm" },
-            ]}
-          />
+      {[['A', 'Keng karta + manbalar', ProdWide], ['B', 'Ko‘rsatkich plitkalari', ProdTiles], ['C', 'Holat kartasi', ProdStatus]].map(([k, name, View]) => (
+        <div key={k} className="pr-variant">
+          <span className="pr-variant__tag">Variant {k} · {name}</span>
+          <View d={d} />
         </div>
-      </div>
+      ))}
     </div>
   )
 }
