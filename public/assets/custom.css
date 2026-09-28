@@ -1363,10 +1363,8 @@ a.contact-row:hover .contact-row__action {
 .gv-a .gv-a__nums p { min-width: 124px; }
 .gv-a__nums span { white-space: nowrap; }
 
-/* Qabul ko'rsatkichlari — variantlar (A–C), tanlovdan keyin bittasi qoladi */
-.av-variant { position: relative; margin-top: 14px; }
-.av-variant__tag { position: absolute; top: -12px; right: 16px; z-index: 2; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
-.av-variant p { text-align: left; }
+/* Qabul ko'rsatkichlari — halqa + reyting (tanlangan variant A) */
+.gv-a__side p { text-align: left; }
 .av-note { margin: 10px 0 0 !important; font-size: 12px; color: #697d9f; }
 /* ommabop reyting ro'yxati */
 .av-pop { display: flex; flex-direction: column; gap: 10px; }
@@ -1385,30 +1383,3 @@ a.contact-row:hover .contact-row__action {
 .av-blue { color: #3e7bb6 !important; font-size: 26px !important; }
 .gv-a .gv-a__nums p.av-band { background: rgba(62, 123, 182, .12); }
 .gv-a__nums .av-band b { color: #3e7bb6; }
-/* B */
-.av-medals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.av-medal { position: relative; padding: 16px 16px 14px; border-radius: 12px; background: #f7f9fc; border-top: 5px solid #b3bccb; }
-.av-medal.is-top1 { border-top-color: #f2c94c; }
-.av-medal.is-top3 { border-top-color: #d99a6c; }
-.av-medal__rank { position: absolute; top: 12px; right: 14px; font-size: 26px; font-weight: 800; color: #dfe4ed; }
-.av-medal .av-medal__name { margin: 0 0 6px !important; padding-right: 30px; font-size: 16px; font-weight: 600; color: #0a1f44; }
-.av-medal .av-medal__num { margin: 0 !important; font-size: 14px; color: #697d9f; }
-.av-medal__num b { font-size: 26px; color: #3e7bb6; }
-/* C */
-.av-c { flex-direction: row !important; gap: 32px; }
-.av-c__left { flex: 0 0 38%; display: flex; flex-direction: column; justify-content: center; padding-right: 24px; border-right: 1px solid #eef1f6; }
-.av-c .av-c__label { margin: 0 0 6px !important; font-size: 14px; color: #697d9f; }
-.av-c .av-c__big { margin: 0 !important; color: #3a4a66; font-size: 18px; }
-.av-c__big b { font-size: 48px; font-weight: 700; color: #3e7bb6; line-height: 1; }
-.av-c__bar { height: 12px; margin: 14px 0; border-radius: 8px; background: #eef2f7; }
-.av-c__bar i { display: block; height: 100%; border-radius: 8px; background: #3e7bb6; }
-.av-c__facts { display: flex; gap: 10px; }
-.av-c .av-c__facts p { flex: 1; display: flex; flex-direction: column; margin: 0 !important; padding: 10px 12px; border-radius: 10px; background: #f3f5f9; }
-.av-c__facts b { font-size: 22px; color: #0a1f44; }
-.av-c__facts span { font-size: 12px; color: #697d9f; }
-.av-c__right { flex: 1; min-width: 0; }
-@media only screen and (max-width: 991px) {
-  .av-medals { grid-template-columns: 1fr; }
-  .av-c { flex-direction: column !important; }
-  .av-c__left { padding-right: 0; border-right: none; }
-}

@@ -328,7 +328,7 @@ function Students({ d, site }) {
 
 // Qabul ko'rsatkichlari: reja, qabul qilinganlar va ommabop kasb va mutaxassisliklar
 // (ommaboplik — 1-kurs o'quvchilari soni bo'yicha, ya'ni joriy qabul; manba: o'quvchilar ro'yxati).
-// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+// Ko'rinish: halqa + reyting (3 ta variantdan foydalanuvchi tanlagani: "A", 29.09.2026).
 function popularByIntake(limit = 5) {
   return programs.programs
     .map((p) => ({ name: p.name, count: p.courses['1'] || 0 }))
@@ -338,10 +338,10 @@ function popularByIntake(limit = 5) {
 }
 const intakeTotal = () => programs.courses['1'] || 0
 
-function PopularRanked({ items, compact }) {
+function PopularRanked({ items }) {
   const max = items[0]?.count || 1
   return (
-    <div className={`av-pop ${compact ? 'is-compact' : ''}`}>
+    <div className="av-pop">
       {items.map((p, i) => (
         <div key={p.name} className="av-pop__row">
           <span className={`av-pop__rank ${i < 3 ? `is-top${i + 1}` : ''}`}>{i + 1}</span>
@@ -355,7 +355,6 @@ function PopularRanked({ items, compact }) {
   )
 }
 
-// A — chapda bajarilish halqasi + reja/qabul kataklari, o'ngda ommabop reyting (bitiruvchilar bloki bilan bir uslub)
 function AdmissionRing({ plan, admitted }) {
   const r = 62, c = 2 * Math.PI * r
   const share = plan ? admitted / plan : 0
@@ -384,86 +383,12 @@ function AdmissionRing({ plan, admitted }) {
   )
 }
 
-// B — tepada reja/qabul chizig'i (to'liq kenglik), ostida TOP-3 medal kartalari + qolganlari ro'yxatda
-function AdmissionCards({ plan, admitted }) {
-  const free = Math.max(plan - admitted, 0)
-  const done = plan > 0 ? Math.min(100, (admitted / plan) * 100) : 0
-  const pop = popularByIntake()
-  return (
-    <>
-      <div className="grad-overview mb-3">
-        <div className="grad-overview__stats">
-          <div className="grad-overview__stat">
-            <div className="teacher-certs__icon"><img src={`${IMG}/university-stat-1.svg`} alt="" /></div>
-            <div><p className="teacher-certs__label">Qabul rejasi</p><p className="grad-overview__value"><b className="teacher-certs__num">{fmt(plan)}</b> <span className="teacher-certs__unit">o'rin</span></p></div>
-          </div>
-          <div className="grad-overview__divider"></div>
-          <div className="grad-overview__stat">
-            <div className="teacher-certs__icon"><img src={`${IMG}/university-staff-1.svg`} alt="" /></div>
-            <div><p className="teacher-certs__label">Qabul qilinganlar</p><p className="grad-overview__value"><b className="teacher-certs__num">{fmt(admitted)}</b> <span className="teacher-certs__unit">nafar · {pct(admitted, plan, 1)}%</span></p></div>
-          </div>
-        </div>
-        <div className="grad-overview__split">
-          <span className="is-in" style={{ width: `${done}%` }}></span>
-          {free > 0 && <span className="is-rest" style={{ width: `${100 - done}%` }}></span>}
-        </div>
-        <div className="grad-overview__legend">
-          <span><i className="is-in"></i>{fmt(admitted)} nafar qabul qilindi</span>
-          {free > 0 && <span><i className="is-rest"></i>{fmt(free)} o'rin bo'sh qoldi</span>}
-        </div>
-      </div>
-      <div className="content-section__inner mb-3">
-        <h2 className="university-bars--title"><img src={`${IMG}/vocational-famous.svg`} alt="" /> Ommabop kasb va mutaxassisliklar</h2>
-        <div className="av-medals">
-          {pop.slice(0, 3).map((p, i) => (
-            <div key={p.name} className={`av-medal is-top${i + 1}`}>
-              <span className="av-medal__rank">{i + 1}</span>
-              <p className="av-medal__name">{p.name}</p>
-              <p className="av-medal__num"><b>{fmt(p.count)}</b> nafar · {pct(p.count, intakeTotal())}%</p>
-            </div>
-          ))}
-        </div>
-        <p className="av-note">1-kurs o'quvchilari soni bo'yicha (jami {fmt(intakeTotal())} nafar)</p>
-      </div>
-    </>
-  )
-}
-
-// C — bitta karta: chapda katta "673 / 720" + chiziq + bo'sh o'rinlar, o'ngda ixcham ommabop ro'yxat
-function AdmissionCompact({ plan, admitted }) {
-  const free = Math.max(plan - admitted, 0)
-  const done = plan > 0 ? Math.min(100, (admitted / plan) * 100) : 0
-  return (
-    <div className="content-section__inner mb-3 av-c">
-      <div className="av-c__left">
-        <p className="av-c__label">Qabul rejasining bajarilishi</p>
-        <p className="av-c__big"><b>{fmt(admitted)}</b><span> / {fmt(plan)} o'rin</span></p>
-        <div className="av-c__bar"><i style={{ width: `${done}%` }}></i></div>
-        <div className="av-c__facts">
-          <p><b>{pct(admitted, plan, 1)}%</b><span>bajarildi</span></p>
-          <p><b>{fmt(free)}</b><span>bo'sh o'rin</span></p>
-        </div>
-      </div>
-      <div className="av-c__right">
-        <h2 className="university-bars--title"><img src={`${IMG}/vocational-famous.svg`} alt="" /> Ommabop kasb va mutaxassisliklar</h2>
-        <PopularRanked items={popularByIntake(3)} compact />
-        <p className="av-note">1-kurs o'quvchilari soni bo'yicha</p>
-      </div>
-    </div>
-  )
-}
-
 function Admission({ d }) {
   const [plan, admitted] = d['K2.4']
   return (
     <div>
       <SectionTop title="Qabul ko'rsatkichlari" date={passport.date} />
-      {[['A', 'Halqa + reyting', AdmissionRing], ['B', 'Chiziq + TOP-3 kartalar', AdmissionCards], ['C', 'Bitta ixcham karta', AdmissionCompact]].map(([k, name, View]) => (
-        <div key={k} className="av-variant">
-          <span className="av-variant__tag">Variant {k} · {name}</span>
-          <View plan={plan} admitted={admitted} />
-        </div>
-      ))}
+      <AdmissionRing plan={plan} admitted={admitted} />
     </div>
   )
 }
