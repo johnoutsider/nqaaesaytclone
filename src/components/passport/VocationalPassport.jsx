@@ -218,13 +218,164 @@ function Teachers({ d, site }) {
   )
 }
 
+// Tanlov g'oliblari + kurslar kesimi.
+// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+const COMP_GROUPS = [
+  { title: 'Kasbiy tanlovlar', color: '#FFA151', idx: [0, 1, 2, 3] },
+  { title: 'Olimpiadalar', color: '#7161FF', idx: [4, 5, 6] },
+]
+const COMP_NAMES = ['WorldSkills', 'Milliy tanlov — respublika', 'Milliy tanlov — hudud', 'Boshqa kasbiy tanlovlar', 'Xalqaro olimpiada', 'Olimpiada — respublika bosqichi', 'Boshqa tanlovlar']
+const COURSE_COLORS = ['#3E7BB6', '#19AE8B', '#FFA151', '#7161FF']
+
+function CardHead({ children, icon = 'university-direction.svg' }) {
+  return (
+    <h2 className="university-bars--title">
+      <img src={`${IMG}/${icon}`} alt="" /> {children}
+    </h2>
+  )
+}
+
+// A — tanlovlar: 2 guruh plitkalari (bor bo'lsa rangli); kurslar: 3 ta katta raqamli plitka
+function CompTilesA({ vals }) {
+  const total = vals.reduce((s, v) => s + v, 0)
+  return (
+    <div className="content-section__inner h-100">
+      <CardHead>Tanlov va olimpiada g'oliblari</CardHead>
+      <p className="cv-total"><b>{total}</b> nafar g'olib</p>
+      {COMP_GROUPS.map((g) => (
+        <div key={g.title} className="cv-group" style={{ '--c': g.color }}>
+          <p className="cv-group__title">{g.title}</p>
+          <div className="cv-tiles">
+            {g.idx.map((i) => (
+              <div key={i} className={`cv-tile ${vals[i] ? 'is-on' : ''}`}>
+                <b>{vals[i]}</b>
+                <span>{COMP_NAMES[i]}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+function CoursesTilesA() {
+  const entries = Object.entries(programs.courses)
+  return (
+    <div className="content-section__inner h-100">
+      <CardHead>Kurslar kesimida</CardHead>
+      <div className="cv-course-tiles">
+        {entries.map(([k, v], i) => (
+          <div key={k} className="cv-course-tile" style={{ '--c': COURSE_COLORS[i] }}>
+            <span>{k}-kurs</span>
+            <b>{fmt(v)}</b>
+            <small>{pct(v, programs.total)}% o'quvchilar</small>
+            <div className="cv-course-tile__bar"><i style={{ width: `${pct(v, programs.total)}%` }}></i></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// B — tanlovlar: jami + ikki guruh yig'indisi (ixcham); kurslar: vertikal ustunlar
+function CompCompactB({ vals }) {
+  const total = vals.reduce((s, v) => s + v, 0)
+  return (
+    <div className="content-section__inner h-100">
+      <CardHead>Tanlov va olimpiada g'oliblari</CardHead>
+      <div className="cv-compact">
+        <div className="cv-compact__big">
+          <b>{total}</b>
+          <span>nafar g'olib</span>
+        </div>
+        <div className="cv-compact__groups">
+          {COMP_GROUPS.map((g) => (
+            <div key={g.title} className="cv-compact__group" style={{ '--c': g.color }}>
+              <p className="cv-compact__head"><span>{g.title}</span><b>{g.idx.reduce((s, i) => s + vals[i], 0)}</b></p>
+              {g.idx.map((i) => (
+                <p key={i} className="cv-compact__row"><span>{COMP_NAMES[i]}</span><b>{vals[i]}</b></p>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+function CoursesColumnsB() {
+  const entries = Object.entries(programs.courses)
+  const max = Math.max(...entries.map(([, v]) => v), 1)
+  return (
+    <div className="content-section__inner h-100">
+      <CardHead>Kurslar kesimida</CardHead>
+      <div className="cv-cols">
+        {entries.map(([k, v], i) => (
+          <div key={k} className="cv-col">
+            <span className="cv-col__val">{fmt(v)} <small>{pct(v, programs.total)}%</small></span>
+            <div className="cv-col__track">
+              <i style={{ height: `${(v / max) * 100}%`, background: COURSE_COLORS[i] }}></i>
+            </div>
+            <span className="cv-col__label">{k}-kurs</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// C — bitta keng karta: chapda kurslar (bo'lingan chiziq, raqam ichida), o'ngda tanlovlar belgi (chip) ko'rinishida
+function CompCoursesWideC({ vals }) {
+  const entries = Object.entries(programs.courses)
+  return (
+    <div className="content-section__inner mb-3 cv-wide">
+      <div className="cv-wide__part">
+        <CardHead>Kurslar kesimida</CardHead>
+        <div className="cv-seg">
+          {entries.map(([k, v], i) => (
+            <span key={k} style={{ flex: v, background: COURSE_COLORS[i] }}>
+              <b>{fmt(v)}</b> {k}-kurs
+            </span>
+          ))}
+        </div>
+        <p className="cv-seg__note">Jami {fmt(programs.total)} o'quvchi</p>
+      </div>
+      <div className="cv-wide__part">
+        <CardHead>Tanlov va olimpiada g'oliblari</CardHead>
+        <div className="cv-chips">
+          {COMP_NAMES.map((n, i) => (
+            <span key={n} className={`cv-chip ${vals[i] ? 'is-on' : ''}`}>
+              {n} <b>{vals[i]}</b>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function CompCoursesVariant({ d, variant }) {
+  const vals = d['K4.1'].slice(1, 8)
+  const tag = { A: 'Plitkalar', B: 'Ixcham + ustunlar', C: 'Bitta keng karta' }[variant]
+  return (
+    <div className="cv-variant">
+      <span className="cv-variant__tag">Variant {variant} · {tag}</span>
+      {variant === 'C' ? (
+        <CompCoursesWideC vals={vals} />
+      ) : (
+        <div className="row">
+          <div className="col-lg-6 mb-3">{variant === 'A' ? <CompTilesA vals={vals} /> : <CompCompactB vals={vals} />}</div>
+          <div className="col-lg-6 mb-3">{variant === 'A' ? <CoursesTilesA /> : <CoursesColumnsB />}</div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function Students({ d, site }) {
   const [O, xCert, mCert] = d['K4.2']
   const [, dual] = d['K3.3']
   const [hours, missed] = d['K2.3']
   const [, intlStudents] = d['K2.5']
-  const comp = d['K4.1']
-  const COMP = ['WorldSkills', 'Milliy tanlov — respublika', 'Milliy tanlov — hudud', 'Boshqa kasbiy tanlovlar', 'Xalqaro olimpiada', 'Olimpiada — respublika bosqichi', 'Boshqa tanlovlar']
   return (
     <div>
       <SectionTop title="O'quvchilar" date={passport.date} />
@@ -256,22 +407,9 @@ function Students({ d, site }) {
           <CertItem label="Milliy sertifikatga ega" count={mCert} total={O} unit="o'quvchi" variant="national" />
         </div>
       </div>
-      <div className="row">
-        <div className="col-lg-6 mb-3">
-          <FactList
-            title="Tanlov va olimpiada g'oliblari"
-            rows={COMP.map((label, i) => ({ label, value: comp[i + 1] }))}
-          />
-        </div>
-        <div className="col-lg-6 mb-3">
-          <BreakdownCard
-            title="Kurslar kesimida"
-            total={programs.total}
-            colors={['#3E7BB6', '#19AE8B', '#FFA151', '#7161FF']}
-            items={Object.entries(programs.courses).map(([k, v]) => ({ key: `${k}-kurs`, value: v }))}
-          />
-        </div>
-      </div>
+      <CompCoursesVariant d={d} variant="A" />
+      <CompCoursesVariant d={d} variant="B" />
+      <CompCoursesVariant d={d} variant="C" />
     </div>
   )
 }

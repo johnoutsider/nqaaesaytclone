@@ -1283,3 +1283,57 @@ a.contact-row:hover .contact-row__action {
    qatorlar karta balandligi bo'ylab teng taqsimlanadi. */
 .content-section__inner.h-100 > .qual-list { flex: 1; justify-content: space-between; }
 .content-section__inner.h-100 > .qual-list .qual-list__row { flex: 1; align-items: center; }
+
+/* Tanlovlar + kurslar — variantlar (A–C), tanlovdan keyin bittasi qoladi */
+.cv-variant { position: relative; margin-top: 14px; }
+.cv-variant__tag { position: absolute; top: -12px; right: 16px; z-index: 2; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
+.cv-variant p { text-align: left; }
+/* A */
+.cv-total { margin: 0 0 12px !important; color: #3a4a66; }
+.cv-total b { font-size: 32px; font-weight: 700; color: #0a1f44; }
+.cv-group + .cv-group { margin-top: 12px; }
+.cv-group__title { margin: 0 0 6px !important; font-size: 13px; font-weight: 600; color: #697d9f; }
+.cv-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.cv-tile { display: flex; flex-direction: column; gap: 2px; padding: 10px; border-radius: 10px; background: #f3f5f9; color: #9aa6ba; }
+.cv-tile b { font-size: 22px; line-height: 1; }
+.cv-tile span { font-size: 12px; line-height: 1.25; }
+.cv-tile.is-on { background: var(--c); color: #fff; }
+.cv-course-tiles { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.cv-course-tile { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 16px; border-radius: 12px; background: #f7f9fc; border-top: 4px solid var(--c); }
+.cv-course-tile span { font-size: 14px; color: #697d9f; }
+.cv-course-tile b { font-size: 34px; font-weight: 700; color: var(--c); line-height: 1.1; }
+.cv-course-tile small { font-size: 12px; color: #697d9f; }
+.cv-course-tile__bar { height: 6px; margin-top: 6px; border-radius: 6px; background: #e8edf4; }
+.cv-course-tile__bar i { display: block; height: 100%; border-radius: 6px; background: var(--c); }
+/* B */
+.cv-compact { flex: 1; display: flex; gap: 20px; align-items: center; }
+.cv-compact__big { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; padding: 16px; border-radius: 14px; background: #f3f5f9; }
+.cv-compact__big b { font-size: 44px; font-weight: 700; line-height: 1; color: #0a1f44; }
+.cv-compact__big span { font-size: 13px; color: #697d9f; }
+.cv-compact__groups { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.cv-compact__group { padding-left: 12px; border-left: 3px solid var(--c); }
+.cv-compact__head, .cv-compact__row { display: flex; justify-content: space-between; margin: 0 !important; }
+.cv-compact__head { font-weight: 600; font-size: 14px; color: #0a1f44; margin-bottom: 2px !important; }
+.cv-compact__row { font-size: 13px; color: #697d9f; padding: 1px 0; }
+.cv-cols { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; min-height: 220px; }
+.cv-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.cv-col__val { font-size: 18px; font-weight: 700; color: #0a1f44; }
+.cv-col__val small { font-size: 12px; font-weight: 400; color: #697d9f; }
+.cv-col__track { flex: 1; display: flex; align-items: flex-end; width: 100%; max-width: 72px; border-radius: 10px; background: #f1f4f8; }
+.cv-col__track i { display: block; width: 100%; border-radius: 10px; }
+.cv-col__label { font-size: 14px; color: #3a4a66; }
+/* C */
+.cv-wide { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.cv-seg { display: flex; gap: 3px; height: 48px; border-radius: 12px; overflow: hidden; }
+.cv-seg span { display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 70px; color: #fff; font-size: 13px; white-space: nowrap; }
+.cv-seg span b { font-size: 17px; }
+.cv-seg__note { margin: 8px 0 0 !important; font-size: 13px; color: #697d9f; }
+.cv-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.cv-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 20px; background: #f3f5f9; color: #697d9f; font-size: 13px; }
+.cv-chip b { color: #0a1f44; }
+.cv-chip.is-on { background: rgba(255, 161, 81, .18); color: #b86a1f; }
+@media only screen and (max-width: 768px) {
+  .cv-wide { grid-template-columns: 1fr; }
+  .cv-compact { flex-direction: column; align-items: stretch; }
+  .cv-course-tile b { font-size: 26px; }
+}
