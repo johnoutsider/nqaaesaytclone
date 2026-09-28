@@ -105,8 +105,8 @@ function Programs({ declared }) {
   )
 }
 
-// Jalb qilingan mutaxassislar va ilmiy salohiyat.
-// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+// Jalb qilingan mutaxassislar va ilmiy salohiyat: ikki blok — jami raqam, jamoadagi ulushi va qisqa ro'yxat
+// (3 ta variantdan foydalanuvchi tanlagani: "B — jami + ro'yxat", 29.09.2026).
 function expertGroups(d) {
   const [P, ilmiy, xorijdan, top1000] = d['K1.1']
   const [, soha, xorijiy, otm] = d['K1.7']
@@ -135,29 +135,6 @@ function expertGroups(d) {
   }
 }
 
-// A — ikki guruh, har biri 3 ta raqamli plitka; nol plitkalar kulrang
-function ExpertsTiles({ d }) {
-  const { groups } = expertGroups(d)
-  return (
-    <div className="ex-tiles">
-      {groups.map((g) => (
-        <div key={g.title} className="ex-tiles__group" style={{ '--c': g.color }}>
-          <p className="ex-tiles__title">{g.title}</p>
-          <div className="ex-tiles__row">
-            {g.items.map((it) => (
-              <div key={it.label} className={`ex-tile ${it.value ? 'is-on' : ''}`}>
-                <b>{it.value}</b>
-                <span>{it.short}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-// B — ikki blok: katta jami raqam + jamoadagi ulushi, ostida qisqa ro'yxat
 function ExpertsSummary({ d }) {
   const { P, groups } = expertGroups(d)
   return (
@@ -181,43 +158,13 @@ function ExpertsSummary({ d }) {
   )
 }
 
-// C — "nishonlar": 6 ta doira, ichida son; bor bo'lsa rangli, yo'q bo'lsa kulrang
-function ExpertsBadges({ d }) {
-  const { groups } = expertGroups(d)
+function ExpertsCard({ d }) {
   return (
-    <div className="ex-badges">
-      {groups.map((g) => (
-        <div key={g.title} className="ex-badges__group" style={{ '--c': g.color }}>
-          <p className="ex-badges__title">{g.title}</p>
-          <div className="ex-badges__row">
-            {g.items.map((it) => (
-              <div key={it.label} className={`ex-badge ${it.value ? 'is-on' : ''}`}>
-                <span className="ex-badge__circle">{it.value}</span>
-                <span className="ex-badge__label">{it.short}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-const EXPERT_VARIANTS = [
-  ['A', 'Plitkalar', ExpertsTiles],
-  ['B', 'Jami + ro‘yxat', ExpertsSummary],
-  ['C', 'Nishonlar', ExpertsBadges],
-]
-
-function ExpertsCard({ d, variant }) {
-  const [key, name, View] = EXPERT_VARIANTS.find((v) => v[0] === variant)
-  return (
-    <div className="content-section__inner h-100 ex-variant">
-      <span className="ex-variant__tag">Variant {key} · {name}</span>
+    <div className="content-section__inner h-100">
       <h2 className="university-bars--title">
         <img src={`${IMG}/university-direction.svg`} alt="" /> Jalb qilingan mutaxassislar va ilmiy salohiyat
       </h2>
-      <View d={d} />
+      <ExpertsSummary d={d} />
     </div>
   )
 }
@@ -250,16 +197,7 @@ function Teachers({ d, site }) {
           />
         </div>
         <div className="col-lg-6 mb-3">
-          <ExpertsCard d={d} variant="A" />
-        </div>
-      </div>
-      {/* VAQTINCHA: B va C variantlari — tanlovdan keyin olib tashlanadi */}
-      <div className="row">
-        <div className="col-lg-6 mb-3">
-          <ExpertsCard d={d} variant="B" />
-        </div>
-        <div className="col-lg-6 mb-3">
-          <ExpertsCard d={d} variant="C" />
+          <ExpertsCard d={d} />
         </div>
       </div>
       <div className="content-section__inner teacher-certs mb-3">
