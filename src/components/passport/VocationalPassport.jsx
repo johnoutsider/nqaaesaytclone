@@ -220,9 +220,9 @@ function Teachers({ d, site }) {
 
 function Students({ d, site }) {
   const [O, xCert, mCert] = d['K4.2']
-  const [dualTotal, dual] = d['K3.3']
+  const [, dual] = d['K3.3']
   const [hours, missed] = d['K2.3']
-  const [, intlStudents, intlPrograms] = d['K2.5']
+  const [, intlStudents] = d['K2.5']
   const comp = d['K4.1']
   const COMP = ['WorldSkills', 'Milliy tanlov — respublika', 'Milliy tanlov — hudud', 'Boshqa kasbiy tanlovlar', 'Xalqaro olimpiada', 'Olimpiada — respublika bosqichi', 'Boshqa tanlovlar']
   return (
@@ -236,32 +236,16 @@ function Students({ d, site }) {
           { label: "Xalqaro va qo'shma dasturlarda", value: intlStudents },
         ]}
       />
-      <div className="row">
-        <div className="col-lg-4 mb-3">
-          <PercentCard
-            label="Davomat"
-            percent={pct(hours - missed, hours, 1)}
-            variant="national"
-            icon="calendar-uni.svg"
-            note={`${fmt(hours)} dars soatidan ${fmt(missed)} soati sababsiz qoldirilgan`}
-          />
-        </div>
-        <div className="col-lg-4 mb-3">
-          <PercentCard
-            label="Dual ta'lim"
-            percent={pct(dual, dualTotal)}
-            variant="teal"
-            note={`${fmt(dualTotal)} o'quvchidan ${fmt(dual)} nafari o'qish bilan birga korxonada ishlaydi`}
-          />
-        </div>
-        <div className="col-lg-4 mb-3">
-          <PercentCard
-            label="Xalqaro va qo'shma dasturlar"
-            percent={pct(intlStudents, O)}
-            variant="purple"
-            note={`${intlPrograms} ta dastur · ${fmt(intlStudents)} nafar o'quvchi`}
-          />
-        </div>
+      {/* Davomat — to'liq kenglikda (dual va xalqaro dasturlar yuqoridagi kartada) */}
+      <div className="mb-3">
+        <PercentCard
+          label="Davomat"
+          percent={pct(hours - missed, hours, 1)}
+          variant="national"
+          icon="calendar-uni.svg"
+          text="O'quv mashg'ulotlariga qatnashish darajasi"
+          note={`${fmt(hours)} dars soatidan ${fmt(missed)} soati sababsiz qoldirilgan`}
+        />
       </div>
       <div className="content-section__inner teacher-certs mb-3">
         <h2 className="university-bars--title">
