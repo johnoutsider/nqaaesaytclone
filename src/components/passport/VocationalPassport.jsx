@@ -88,13 +88,6 @@ function Programs({ declared }) {
   return (
     <div id="talim-dasturlari">
       <SectionTop title="Ta'lim dasturlari" />
-      <OverviewCard
-        items={[
-          { label: "Ta'lim dasturlari", value: declared, unit: 'ta', icon: 'vocational-stat-1.svg' },
-          { label: "O'quvchilari bor dasturlar", value: programs.programs.length, unit: 'ta', icon: 'vocational-stat-2.svg' },
-          { label: "Jami o'quvchilar", value: programs.total },
-        ]}
-      />
       <div className="content-section__inner mb-3">
         <h2 className="university-bars--title">
           <img src={`${IMG}/vocational-famous.svg`} alt="" /> Dasturlar va o'quvchilar soni
