@@ -1311,53 +1311,31 @@ a.contact-row:hover .contact-row__action {
 .cv-col__pct { margin-top: 10px; color: #fff; font-style: normal; font-size: 20px; font-weight: 700; line-height: 1; }
 .cv-col__val small { font-size: 13px; }
 
-/* Bitiruvchilar — variantlar (A–C), tanlovdan keyin bittasi qoladi */
-.gv-variant { position: relative; margin-top: 14px; }
-.gv-variant__tag { position: absolute; top: -12px; right: 16px; z-index: 2; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
-.gv-variant p { text-align: left; }
+/* Bitiruvchilar — halqa + ustunlar (tanlangan variant A) */
+.gv-a p { text-align: left; }
 .gv-popular { margin-top: 16px; padding-top: 12px; border-top: 1px solid #eef1f6; }
 .gv-popular__title { margin: 0 0 6px !important; font-size: 13px; font-weight: 600; color: #697d9f; }
 .gv-popular__row { display: flex; justify-content: space-between; margin: 0 !important; padding: 3px 0; font-size: 14px; color: #3a4a66; }
 .gv-popular__row b { color: #0a1f44; }
-/* A */
 .gv-a { flex-direction: row !important; gap: 32px; align-items: center; }
-.gv-a__ring { position: relative; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
-.gv-a__center { position: absolute; top: 0; left: 0; width: 160px; height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.gv-a__ring { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+.gv-a__circle { position: relative; width: 160px; height: 160px; }
+.gv-a__center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .gv-a__center b { font-size: 36px; font-weight: 700; color: #19ae8b; line-height: 1; }
 .gv-a__center span { font-size: 13px; color: #697d9f; }
-.gv-page p.gv-a__caption, .gv-a__caption { margin: 8px 0 0 !important; font-size: 14px; color: #3a4a66; text-align: center !important; }
+.gv-a .gv-a__caption { margin: 8px 0 0 !important; font-size: 14px; color: #3a4a66; text-align: center; }
 .gv-a__bars { flex: 1; min-width: 0; }
-.gv-a__row { display: grid; grid-template-columns: 260px 1fr 44px; align-items: center; gap: 12px; margin-top: 10px; }
-.gv-a__label { font-size: 14px; color: #0a1f44; }
+/* nom ustuni eng uzun nomga moslashadi va bir qatorda turadi */
+.gv-a__bars { display: grid; grid-template-columns: max-content 1fr 44px; column-gap: 14px; row-gap: 10px; align-items: center; }
+.gv-a__bars > .university-bars--title, .gv-a__bars > .gv-popular { grid-column: 1 / -1; }
+.gv-a__row { display: contents; }
+.gv-a__label { font-size: 14px; color: #0a1f44; white-space: nowrap; }
 .gv-a__track { height: 26px; border-radius: 8px; background: #f1f4f8; }
 .gv-a__track i { display: flex; align-items: center; justify-content: flex-end; height: 100%; min-width: 30px; padding: 0 8px; border-radius: 8px; font-style: normal; font-size: 13px; font-weight: 700; }
 .gv-a__pct { text-align: right; font-size: 14px; color: #697d9f; }
-/* B */
-.gv-b__head p { margin: 0 0 14px !important; font-size: 18px; color: #3a4a66; }
-.gv-b__head b { color: #0a1f44; font-size: 22px; }
-.gv-b__head .gv-b__band { color: #19ae8b; }
-.gv-b__tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.gv-b__tile { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; background: #f7f9fc; border-top: 5px solid var(--c); }
-.gv-b__tile b { font-size: 34px; font-weight: 700; line-height: 1; color: #0a1f44; }
-.gv-b__pct { font-size: 15px; font-weight: 600; color: #3e7bb6; }
-.gv-b__label { font-size: 13px; line-height: 1.3; color: #697d9f; }
-/* C */
-.gv-c { flex-direction: row !important; gap: 32px; align-items: center; }
-.gv-c__grid-wrap { flex-shrink: 0; width: 330px; }
-.gv-c__title { margin: 0 0 8px !important; font-size: 14px; font-weight: 600; color: #697d9f; }
-.gv-c__grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
-.gv-c__legend { flex: 1; min-width: 0; }
-.gv-c__big { margin: 0 0 12px !important; font-size: 16px; color: #3a4a66; }
-.gv-c__big b { font-size: 40px; font-weight: 700; color: #19ae8b; }
-.gv-c__big span { color: #697d9f; font-size: 14px; }
-.gv-c__row { display: flex; align-items: center; gap: 10px; margin: 0 !important; padding: 7px 0; border-bottom: 1px solid #eef1f6; font-size: 15px; color: #0a1f44; }
-.gv-c__row i { flex-shrink: 0; width: 14px; height: 14px; border-radius: 4px; }
-.gv-c__row span { flex: 1; }
 @media only screen and (max-width: 991px) {
-  .gv-a, .gv-c { flex-direction: column !important; align-items: stretch; }
+  .gv-a { flex-direction: column !important; align-items: stretch; }
   .gv-a__ring { align-self: center; }
-  .gv-a__row { grid-template-columns: 1fr 44px; }
-  .gv-a__label { grid-column: span 2; }
-  .gv-c__grid-wrap { width: 100%; max-width: 330px; align-self: center; }
-  .gv-b__tiles { grid-template-columns: repeat(2, 1fr); }
+  .gv-a__bars { grid-template-columns: 1fr 44px; }
+  .gv-a__label { grid-column: 1 / -1; white-space: normal; }
 }
