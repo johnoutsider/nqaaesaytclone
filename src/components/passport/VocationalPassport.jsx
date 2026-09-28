@@ -58,54 +58,144 @@ function PercentCard({ label, percent, text, note, variant = 'intl', icon = 'uni
   )
 }
 
-// Ta'lim dasturlari: har dastur nomi, o'quvchilar soni, ulushi va kurslar kesimi
-function Programs({ declared }) {
-  const withStudents = programs.programs.length
-  const empty = Math.max((declared || 0) - withStudents, 0)
+// Ta'lim dasturlari: dastur nomi, o'quvchilar soni va kurslar kesimi.
+// VAQTINCHA: 4 ta ko'rinish varianti (A–D) yonma-yon — foydalanuvchi bittasini tanlaydi.
+const PROG_COLORS = ['#3E7BB6', '#19AE8B', '#FFA151', '#7161FF', '#E187FF', '#4E95DA', '#23939F', '#F2C94C', '#B3BCCB']
+const COURSES = ['1', '2', '3']
+
+function ProgramsNote({ declared }) {
+  const empty = Math.max((declared || 0) - programs.programs.length, 0)
+  return (
+    <p className="teacher-certs__note mt-3 mb-0">
+      {empty > 0 && `${declared} ta dasturdan ${empty} tasida hozir o'quvchi yo'q. `}
+      Barcha o'quvchilar {Object.keys(programs.forms).join(', ').toLowerCase()} ta'lim shaklida. Manba: o'quvchilar ro'yxati.
+    </p>
+  )
+}
+
+// A — kartochkalar: har dastur alohida karta
+function ProgramsCards() {
+  return (
+    <div className="pv-cards">
+      {programs.programs.map((p, i) => (
+        <div key={p.name} className="pv-card" style={{ '--c': PROG_COLORS[i % PROG_COLORS.length] }}>
+          <p className="pv-card__name">{p.name}</p>
+          <p className="pv-card__num"><b>{fmt(p.total)}</b> nafar <span>{pct(p.total, programs.total)}%</span></p>
+          <div className="pv-card__courses">
+            {Object.entries(p.courses).map(([k, v]) => (
+              <span key={k}>{k}-kurs <b>{v}</b></span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// B — gorizontal ustunlar: dastur nomi chapda, ustun ichida son
+function ProgramsBars() {
   const max = programs.programs[0]?.total || 1
+  return (
+    <div className="pv-bars">
+      {programs.programs.map((p, i) => (
+        <div key={p.name} className="pv-bars__row">
+          <span className="pv-bars__name">{p.name}</span>
+          <div className="pv-bars__track">
+            <span className="pv-bars__fill" style={{ width: `${(p.total / max) * 100}%`, background: PROG_COLORS[i % PROG_COLORS.length] }}>
+              {fmt(p.total)}
+            </span>
+          </div>
+          <span className="pv-bars__pct">{pct(p.total, programs.total)}%</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// C — jadval: dastur × kurs, jami qatori bilan
+function ProgramsTable() {
+  return (
+    <div className="pv-table-wrap">
+      <table className="pv-table">
+        <thead>
+          <tr>
+            <th>Ta'lim dasturi</th>
+            {COURSES.map((k) => <th key={k}>{k}-kurs</th>)}
+            <th>Jami</th>
+          </tr>
+        </thead>
+        <tbody>
+          {programs.programs.map((p) => (
+            <tr key={p.name}>
+              <td>{p.name}</td>
+              {COURSES.map((k) => <td key={k} className={p.courses[k] ? '' : 'is-empty'}>{p.courses[k] ?? '—'}</td>)}
+              <td><b>{fmt(p.total)}</b></td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Jami</td>
+            {COURSES.map((k) => <td key={k}>{fmt(programs.courses[k] ?? 0)}</td>)}
+            <td>{fmt(programs.total)}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  )
+}
+
+// D — ulushlar chizig'i: bitta 100% chiziq + rangli ro'yxat
+function ProgramsShare() {
+  return (
+    <div>
+      <div className="pv-share__bar">
+        {programs.programs.map((p, i) => (
+          <span key={p.name} title={`${p.name}: ${p.total}`} style={{ width: `${(p.total / programs.total) * 100}%`, background: PROG_COLORS[i % PROG_COLORS.length] }}></span>
+        ))}
+      </div>
+      <div className="pv-share__legend">
+        {programs.programs.map((p, i) => (
+          <div key={p.name} className="pv-share__item">
+            <i style={{ background: PROG_COLORS[i % PROG_COLORS.length] }}></i>
+            <span className="pv-share__name">{p.name}</span>
+            <b>{fmt(p.total)}</b>
+            <small>{pct(p.total, programs.total)}%</small>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const PROGRAM_VARIANTS = [
+  ['A', 'Kartochkalar', ProgramsCards],
+  ['B', 'Gorizontal ustunlar', ProgramsBars],
+  ['C', 'Jadval (kurslar bo‘yicha)', ProgramsTable],
+  ['D', 'Ulushlar chizig‘i', ProgramsShare],
+]
+
+function Programs({ declared }) {
   return (
     <div id="talim-dasturlari">
       <SectionTop title="Ta'lim dasturlari" />
       <OverviewCard
         items={[
           { label: "Ta'lim dasturlari", value: declared, unit: 'ta', icon: 'vocational-stat-1.svg' },
-          { label: "O'quvchilari bor dasturlar", value: withStudents, unit: 'ta', icon: 'vocational-stat-2.svg' },
+          { label: "O'quvchilari bor dasturlar", value: programs.programs.length, unit: 'ta', icon: 'vocational-stat-2.svg' },
           { label: "Jami o'quvchilar", value: programs.total },
         ]}
       />
-      <div className="content-section__inner mb-3">
-        <h2 className="university-bars--title">
-          <img src={`${IMG}/vocational-famous.svg`} alt="" /> Dasturlar va o'quvchilar soni
-        </h2>
-        <ol className="uni-list__items program-list">
-          {programs.programs.map((p, i) => (
-            <li key={p.name} className="uni-list__item">
-              <span className="uni-list__rank">{i + 1}</span>
-              <div className="uni-list__body">
-                <div className="uni-list__row">
-                  <span className="uni-list__name">{p.name}</span>
-                  <span className="uni-list__count">
-                    <b>{fmt(p.total)}</b> nafar · {pct(p.total, programs.total)}%
-                  </span>
-                </div>
-                <div className="uni-list__bar">
-                  <span style={{ width: `${(p.total / max) * 100}%` }}></span>
-                </div>
-                <div className="program-list__courses">
-                  {Object.entries(p.courses).map(([k, v]) => (
-                    <span key={k}>{k}-kurs: <b>{v}</b></span>
-                  ))}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <p className="teacher-certs__note mt-3">
-          {empty > 0 && `${declared} ta dasturdan ${empty} tasida hozir o'quvchi yo'q. `}
-          Barcha o'quvchilar {Object.keys(programs.forms).join(', ').toLowerCase()} ta'lim shaklida.
-          Manba: o'quvchilar ro'yxati ({fmt(programs.total)} nafar).
-        </p>
-      </div>
+      {PROGRAM_VARIANTS.map(([key, name, View]) => (
+        <div key={key} className="content-section__inner mb-3 pv-variant">
+          <span className="pv-variant__tag">Variant {key} · {name}</span>
+          <h2 className="university-bars--title">
+            <img src={`${IMG}/vocational-famous.svg`} alt="" /> Dasturlar va o'quvchilar soni
+          </h2>
+          <View />
+          <ProgramsNote declared={declared} />
+        </div>
+      ))}
     </div>
   )
 }
@@ -382,8 +472,8 @@ export default function VocationalPassport({ org }) {
         org={org}
         onProgramsClick={() => document.getElementById('talim-dasturlari')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
       />
-      <Programs declared={org.programs.total} />
       <Teachers d={d} site={org.teachers} />
+      <Programs declared={org.programs.total} />
       <Students d={d} site={org.students} />
       <Admission d={d} />
       <Graduates d={d} popular={org.graduates.popular} />
