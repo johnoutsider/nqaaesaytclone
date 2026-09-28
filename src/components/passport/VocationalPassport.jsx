@@ -364,42 +364,133 @@ function Admission({ d }) {
   )
 }
 
-function Graduates({ d, popular }) {
+// Bitiruvchilar bo'limi.
+// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+const GRAD_COLORS = ['#0E7C66', '#19AE8B', '#4E95DA', '#D5DCE8']
+
+function gradData(d) {
   const [B, tadbirkor, ish, oqish] = d['K3.4']
   const band = tadbirkor + ish + oqish
+  return {
+    B,
+    band,
+    parts: [
+      { label: 'Tadbirkor / ta’sischi', value: tadbirkor },
+      { label: 'Ish bilan band', value: ish },
+      { label: 'O‘qishni davom ettirmoqda / o‘zini band qilgan', value: oqish },
+      { label: 'Ma’lumot yo‘q', value: Math.max(B - band, 0) },
+    ].map((p, i) => ({ ...p, color: GRAD_COLORS[i] })),
+  }
+}
+
+function PopularList({ popular }) {
+  return (
+    <div className="gv-popular">
+      <p className="gv-popular__title">Ommabop mutaxassisliklar</p>
+      {popular.map((p) => (
+        <p key={p.name} className="gv-popular__row"><span>{p.name}</span><b>{p.count}</b></p>
+      ))}
+    </div>
+  )
+}
+
+// A — chapda katta "band" halqasi (41%), o'ngda har toifa gorizontal ustun (son ichida)
+function GradRing({ d, popular }) {
+  const { B, band, parts } = gradData(d)
+  const r = 62, c = 2 * Math.PI * r
+  const max = Math.max(...parts.map((p) => p.value), 1)
+  return (
+    <div className="content-section__inner mb-3 gv-a">
+      <div className="gv-a__ring">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r={r} fill="none" stroke="#e8edf4" strokeWidth="16" />
+          <circle cx="80" cy="80" r={r} fill="none" stroke="#19AE8B" strokeWidth="16" strokeLinecap="round"
+            strokeDasharray={`${(band / B) * c} ${c}`} transform="rotate(-90 80 80)" />
+        </svg>
+        <div className="gv-a__center"><b>{pct(band, B)}%</b><span>band</span></div>
+        <p className="gv-a__caption"><b>{fmt(band)}</b> / {fmt(B)} bitiruvchi band</p>
+      </div>
+      <div className="gv-a__bars">
+        <h2 className="university-bars--title"><img src={`${IMG}/university-direction.svg`} alt="" /> Bitiruvchilar qayerda?</h2>
+        {parts.map((p) => (
+          <div key={p.label} className="gv-a__row">
+            <span className="gv-a__label">{p.label}</span>
+            <div className="gv-a__track">
+              <i style={{ width: `${(p.value / max) * 100}%`, background: p.color, color: p.color === '#D5DCE8' ? '#3a4a66' : '#fff' }}>{p.value}</i>
+            </div>
+            <span className="gv-a__pct">{pct(p.value, B)}%</span>
+          </div>
+        ))}
+        <PopularList popular={popular} />
+      </div>
+    </div>
+  )
+}
+
+// B — 4 ta rangli plitka (har toifa: katta son + %), tepada jami va band
+function GradTiles({ d, popular }) {
+  const { B, band, parts } = gradData(d)
+  return (
+    <div className="content-section__inner mb-3">
+      <div className="gv-b__head">
+        <p><b>{fmt(B)}</b> bitiruvchidan <b className="gv-b__band">{fmt(band)}</b> nafari band — <b className="gv-b__band">{pct(band, B)}%</b></p>
+      </div>
+      <div className="gv-b__tiles">
+        {parts.map((p) => (
+          <div key={p.label} className="gv-b__tile" style={{ '--c': p.color }}>
+            <b>{p.value}</b>
+            <span className="gv-b__pct">{pct(p.value, B)}%</span>
+            <span className="gv-b__label">{p.label}</span>
+          </div>
+        ))}
+      </div>
+      <PopularList popular={popular} />
+    </div>
+  )
+}
+
+// C — piktogramma: "har 100 bitiruvchidan" — 100 ta odamcha, toifa rangida
+function GradPictogram({ d, popular }) {
+  const { B, band, parts } = gradData(d)
+  // 100 ta katakka taqsimlash (yaxlitlash qoldig'i oxirgi toifaga)
+  const counts = parts.map((p) => Math.round((p.value / B) * 100))
+  counts[counts.length - 1] += 100 - counts.reduce((s, x) => s + x, 0)
+  const dots = counts.flatMap((n, i) => Array.from({ length: n }, () => parts[i].color))
+  return (
+    <div className="content-section__inner mb-3 gv-c">
+      <div className="gv-c__grid-wrap">
+        <p className="gv-c__title">Har 100 bitiruvchidan</p>
+        <div className="gv-c__grid">
+          {dots.map((col, i) => (
+            <svg key={i} viewBox="0 0 24 24" width="100%" height="100%"><circle cx="12" cy="7" r="4.2" fill={col} /><path d="M4 22c0-5 3.6-8.5 8-8.5s8 3.5 8 8.5z" fill={col} /></svg>
+          ))}
+        </div>
+      </div>
+      <div className="gv-c__legend">
+        <p className="gv-c__big"><b>{pct(band, B)}</b> nafari band <span>({fmt(band)} / {fmt(B)})</span></p>
+        {parts.map((p, i) => (
+          <p key={p.label} className="gv-c__row">
+            <i style={{ background: p.color }}></i>
+            <span>{p.label}</span>
+            <b>{counts[i]}</b>
+          </p>
+        ))}
+        <PopularList popular={popular} />
+      </div>
+    </div>
+  )
+}
+
+function Graduates({ d, popular }) {
   return (
     <div>
       <SectionTop title="Bitiruvchilar" date={passport.date} />
-      <OverviewCard
-        items={[
-          { label: 'Jami bitiruvchilar', value: B },
-          { label: 'Band bitiruvchilar', value: band },
-          { label: 'Band bitiruvchilar ulushi', display: pct(band, B), unit: '%', icon: 'university-stat-1.svg' },
-        ]}
-      />
-      <div className="row">
-        <div className="col-lg-7 mb-3">
-          <BreakdownCard
-            title="Bitiruvchilar qayerda?"
-            total={B}
-            colors={['#0E7C66', '#19AE8B', '#4E95DA', '#D5DCE8']}
-            items={[
-              { key: 'Tadbirkor / ta’sischi', value: tadbirkor },
-              { key: 'Ish bilan band', value: ish },
-              { key: 'O‘qishni davom ettirmoqda / o‘zini band qilgan', value: oqish },
-              { key: 'Ma’lumot yo‘q', value: Math.max(B - band, 0) },
-            ]}
-          />
+      {[['A', 'Halqa + ustunlar', GradRing], ['B', 'Plitkalar', GradTiles], ['C', 'Piktogramma (100 kishi)', GradPictogram]].map(([k, name, View]) => (
+        <div key={k} className="gv-variant">
+          <span className="gv-variant__tag">Variant {k} · {name}</span>
+          <View d={d} popular={popular} />
         </div>
-        <div className="col-lg-5 mb-3">
-          <FactList
-            title="Ommabop mutaxassisliklar"
-            icon="vocational-famous.svg"
-            rows={popular.map((p) => ({ label: p.name, value: p.count }))}
-            note="nqaae.uz pasporti bo'yicha, 2025 yil bitiruvchilari"
-          />
-        </div>
-      </div>
+      ))}
     </div>
   )
 }
