@@ -1,8 +1,11 @@
 import { IMG, NA } from './common.jsx'
 
-function InfoItem({ icon, title, value }) {
+function InfoItem({ icon, title, value, onClick }) {
   return (
-    <div className="university-header-content-wrapper-item">
+    <div
+      className={`university-header-content-wrapper-item ${onClick ? 'is-link' : ''}`}
+      {...(onClick ? { role: 'button', tabIndex: 0, onClick, onKeyDown: (e) => e.key === 'Enter' && onClick() } : {})}
+    >
       <div className="university-header-content-wrapper-item-img">
         <img src={`${IMG}/${icon}`} alt="" />
       </div>
@@ -14,7 +17,8 @@ function InfoItem({ icon, title, value }) {
   )
 }
 
-export default function UniversityHeader({ org }) {
+// onProgramsClick: berilsa, "Ta'lim dasturlari" bandi bosiladigan bo'ladi (masalan, dasturlar bo'limiga o'tish)
+export default function UniversityHeader({ org, onProgramsClick }) {
   return (
     <div className="content-section university-header">
       <div className="university-header-img">
@@ -27,7 +31,7 @@ export default function UniversityHeader({ org }) {
           <InfoItem icon="map.svg" title="Hudud" value={org.region} />
           <InfoItem icon="calendar-uni.svg" title="Tashkil etilgan yil" value={org.foundedYear} />
           {/* O'zgarish: "Ta'lim dasturlari" alohida bo'limdan shu yerga ko'chirildi (jami = mahalliy bo'lgani uchun bitta qiymat) */}
-          <InfoItem icon="university-stat-1.svg" title="Ta'lim dasturlari" value={org.programs.total} />
+          <InfoItem icon="university-stat-1.svg" title="Ta'lim dasturlari" value={org.programs.total} onClick={onProgramsClick} />
         </div>
       </div>
     </div>

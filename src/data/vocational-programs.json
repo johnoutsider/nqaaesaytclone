@@ -1,0 +1,87 @@
+{
+ "source": "ta'lim dastur.xlsx",
+ "institution": "Namangan Abu Ali ibn Sino nomidagi jamoat salomatligi texnikumi",
+ "total": 1204,
+ "courses": {
+  "1": 576,
+  "2": 407,
+  "3": 221
+ },
+ "forms": {
+  "Kunduzgi": 1204
+ },
+ "programs": [
+  {
+   "name": "Hamshiralik ishi",
+   "total": 373,
+   "courses": {
+    "1": 237,
+    "2": 136
+   }
+  },
+  {
+   "name": "Davolash ishi",
+   "total": 323,
+   "courses": {
+    "1": 212,
+    "2": 111
+   }
+  },
+  {
+   "name": "Feldsherlik ishi",
+   "total": 156,
+   "courses": {
+    "3": 156
+   }
+  },
+  {
+   "name": "Funktsional diagnostika ishi",
+   "total": 90,
+   "courses": {
+    "1": 30,
+    "2": 32,
+    "3": 28
+   }
+  },
+  {
+   "name": "Tibbiyot brigadasi hamshirasi",
+   "total": 89,
+   "courses": {
+    "1": 29,
+    "2": 60
+   }
+  },
+  {
+   "name": "Farmatsiya",
+   "total": 84,
+   "courses": {
+    "1": 29,
+    "2": 18,
+    "3": 37
+   }
+  },
+  {
+   "name": "Stomatologiya ishi",
+   "total": 45,
+   "courses": {
+    "1": 16,
+    "2": 29
+   }
+  },
+  {
+   "name": "Tibbiy profilaktika ishi",
+   "total": 31,
+   "courses": {
+    "1": 23,
+    "2": 8
+   }
+  },
+  {
+   "name": "Tibbiy radiologiya",
+   "total": 13,
+   "courses": {
+    "2": 13
+   }
+  }
+ ]
+}

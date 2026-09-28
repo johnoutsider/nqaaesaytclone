@@ -1243,3 +1243,15 @@ a.contact-row:hover .contact-row__action {
 .survey-summary b {
   color: #3c878c;
 }
+
+/* Texnikum: ta'lim dasturlari ro'yxati va sarlavhadagi bosiladigan band */
+.program-list .uni-list__row { font-size: 16px; }
+.program-list__courses { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.program-list__courses span { padding: 2px 8px; border-radius: 12px; background: #eef2f7; color: #697d9f; font-size: 12px; }
+.program-list__courses b { color: #0a1f44; font-weight: 600; }
+.university-header-content-wrapper-item.is-link { cursor: pointer; transition: box-shadow .15s ease, transform .15s ease; }
+.university-header-content-wrapper-item.is-link:hover { box-shadow: 0 4px 14px rgba(37, 87, 90, .18); transform: translateY(-1px); }
+.university-header-content-wrapper-item.is-link .university-header-content-wrapper-item-content-desc::after { content: " \203A"; color: #3c878c; }
+.program-list { --accent: #3e7bb6; gap: 16px; }
+.program-list .uni-list__bar { height: 8px; }
+#talim-dasturlari { scroll-margin-top: 170px; }

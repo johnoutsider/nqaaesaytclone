@@ -3,6 +3,7 @@
 // Ma'lumot: src/data/vocational-passport.json (Excel'dan, scripts/texnikum_excel_to_json.py) +
 // src/data/vocational.js (nqaae.uz pasportidan: yosh, mutaxassisliklar, so'rovnoma savollari, bino, bog'lanish).
 import passport from '../../data/vocational-passport.json'
+import programs from '../../data/vocational-programs.json' // scripts/talim_dasturlari_to_json.py — faqat yig'ma sonlar
 import { IMG, SectionTop, OverviewCard } from '../university/common.jsx'
 import UniversityHeader from '../university/UniversityHeader.jsx'
 import { BreakdownCard, AgeStructure } from '../university/Teachers.jsx'
@@ -53,6 +54,58 @@ function PercentCard({ label, percent, text, note, variant = 'intl', icon = 'uni
         <span style={{ width: `${Math.min(100, parseFloat(String(percent).replace(',', '.')) || 0)}%` }}></span>
       </div>
       {note && <p className="teacher-certs__note">{note}</p>}
+    </div>
+  )
+}
+
+// Ta'lim dasturlari: har dastur nomi, o'quvchilar soni, ulushi va kurslar kesimi
+function Programs({ declared }) {
+  const withStudents = programs.programs.length
+  const empty = Math.max((declared || 0) - withStudents, 0)
+  const max = programs.programs[0]?.total || 1
+  return (
+    <div id="talim-dasturlari">
+      <SectionTop title="Ta'lim dasturlari" />
+      <OverviewCard
+        items={[
+          { label: "Ta'lim dasturlari", value: declared, unit: 'ta', icon: 'vocational-stat-1.svg' },
+          { label: "O'quvchilari bor dasturlar", value: withStudents, unit: 'ta', icon: 'vocational-stat-2.svg' },
+          { label: "Jami o'quvchilar", value: programs.total },
+        ]}
+      />
+      <div className="content-section__inner mb-3">
+        <h2 className="university-bars--title">
+          <img src={`${IMG}/vocational-famous.svg`} alt="" /> Dasturlar va o'quvchilar soni
+        </h2>
+        <ol className="uni-list__items program-list">
+          {programs.programs.map((p, i) => (
+            <li key={p.name} className="uni-list__item">
+              <span className="uni-list__rank">{i + 1}</span>
+              <div className="uni-list__body">
+                <div className="uni-list__row">
+                  <span className="uni-list__name">{p.name}</span>
+                  <span className="uni-list__count">
+                    <b>{fmt(p.total)}</b> nafar · {pct(p.total, programs.total)}%
+                  </span>
+                </div>
+                <div className="uni-list__bar">
+                  <span style={{ width: `${(p.total / max) * 100}%` }}></span>
+                </div>
+                <div className="program-list__courses">
+                  {Object.entries(p.courses).map(([k, v]) => (
+                    <span key={k}>{k}-kurs: <b>{v}</b></span>
+                  ))}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p className="teacher-certs__note mt-3">
+          {empty > 0 && `${declared} ta dasturdan ${empty} tasida hozir o'quvchi yo'q. `}
+          Barcha o'quvchilar {Object.keys(programs.forms).join(', ').toLowerCase()} ta'lim shaklida.
+          Manba: o'quvchilar ro'yxati ({fmt(programs.total)} nafar).
+        </p>
+      </div>
     </div>
   )
 }
@@ -133,7 +186,6 @@ function Students({ d, site }) {
   const [, intlStudents, intlPrograms] = d['K2.5']
   const comp = d['K4.1']
   const COMP = ['WorldSkills', 'Milliy tanlov — respublika', 'Milliy tanlov — hudud', 'Boshqa kasbiy tanlovlar', 'Xalqaro olimpiada', 'Olimpiada — respublika bosqichi', 'Boshqa tanlovlar']
-  const topSum = site.specialties.reduce((s, x) => s + x.count, 0)
   return (
     <div>
       <SectionTop title="O'quvchilar" date={passport.date} />
@@ -188,13 +240,11 @@ function Students({ d, site }) {
           />
         </div>
         <div className="col-lg-6 mb-3">
-          <FactList
-            title="Eng ko‘p o‘qilayotgan mutaxassisliklar"
-            icon="vocational-famous.svg"
-            rows={site.specialties
-              .map((s) => ({ label: s.name, value: fmt(s.count) }))
-              .concat([{ label: 'Boshqa mutaxassisliklar', value: fmt(Math.max(site.total - topSum, 0)), muted: true }])}
-            note={`nqaae.uz pasporti bo'yicha (${site.date}), jami ${fmt(site.total)} o'quvchi`}
+          <BreakdownCard
+            title="Kurslar kesimida"
+            total={programs.total}
+            colors={['#3E7BB6', '#19AE8B', '#FFA151', '#7161FF']}
+            items={Object.entries(programs.courses).map(([k, v]) => ({ key: `${k}-kurs`, value: v }))}
           />
         </div>
       </div>
@@ -328,7 +378,11 @@ export default function VocationalPassport({ org }) {
   const d = c.data
   return (
     <div className="university">
-      <UniversityHeader org={org} />
+      <UniversityHeader
+        org={org}
+        onProgramsClick={() => document.getElementById('talim-dasturlari')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+      />
+      <Programs declared={org.programs.total} />
       <Teachers d={d} site={org.teachers} />
       <Students d={d} site={org.students} />
       <Admission d={d} />
