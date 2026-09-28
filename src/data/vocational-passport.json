@@ -1,0 +1,245 @@
+{
+ "source": "Texnikumlar - indikatorlar 2026-09-28.xlsx",
+ "date": "28.09.2026",
+ "fields": {
+  "K1.1": {
+   "title": "Pedagoglar salohiyati",
+   "fields": [
+    "Jami pedagoglar (P)",
+    "Ilmiy darajali (P₁)",
+    "Xorijdan jalb qilingan (P₂)",
+    "TOP-1 000 diplomi (P₃)"
+   ]
+  },
+  "K1.2": {
+   "title": "Malaka toifasiga ega pedagoglar",
+   "fields": [
+    "Jami pedagoglar (P)",
+    "Bosh o'qituvchi (P₁)",
+    "Yetakchi + sertifikatli usta (P₂)",
+    "Katta o'qituvchi (P₃)"
+   ]
+  },
+  "K1.3": {
+   "title": "Malaka oshirish va stajirovka",
+   "fields": [
+    "Jami pedagoglar (P)",
+    "Usta, respublika kursi (P₁)",
+    "Pedagog, respublika kursi (P₂)",
+    "Xorijda oflayn (P₃)"
+   ]
+  },
+  "K1.5": {
+   "title": "Sertifikatga ega pedagoglar",
+   "fields": [
+    "Jami pedagoglar (P)",
+    "Xalqaro sertifikat (P₁)",
+    "Milliy sertifikat (P₂)"
+   ]
+  },
+  "K1.6": {
+   "title": "Pedagoglar so'rovnomasi",
+   "fields": [
+    "Savollar soni (n)",
+    "O'rtacha ulush"
+   ]
+  },
+  "K1.7": {
+   "title": "Jalb qilingan tashqi mutaxassislar",
+   "fields": [
+    "Jami pedagoglar (P)",
+    "Soha mutaxassisi (P₁)",
+    "Xorijiy mutaxassis (P₂)",
+    "OTM professori (P₃)"
+   ]
+  },
+  "K1.8": {
+   "title": "O'quvchilar so'rovnomasi",
+   "fields": [
+    "Savollar soni (n)",
+    "O'rtacha ulush"
+   ]
+  },
+  "K2.1": {
+   "title": "Sharoitlardan qoniqish",
+   "fields": [
+    "Savollar soni (n)",
+    "O'rtacha ulush"
+   ]
+  },
+  "K2.2": {
+   "title": "Moddiy-texnik baza",
+   "fields": [
+    "Savollar soni (n)",
+    "O'rtacha ulush"
+   ]
+  },
+  "K2.3": {
+   "title": "O'quvchilar davomati",
+   "fields": [
+    "Jami soat (D₁)",
+    "Sababsiz o'tkazilgan soat (D₂)"
+   ]
+  },
+  "K2.4": {
+   "title": "Qabul parametrlarining bajarilishi",
+   "fields": [
+    "Reja (qabul parametri)",
+    "Qabul qilinganlar"
+   ]
+  },
+  "K2.5": {
+   "title": "Xalqaro va qo'shma ta'lim dasturlari",
+   "fields": [
+    "Jami o'quvchilar (Oʻ)",
+    "Dasturda tahsil olayotganlar (Oʻ₁)",
+    "Xalqaro va qo'shma dasturlar (P₁)"
+   ]
+  },
+  "K3.2": {
+   "title": "Ishlab chiqarish va tijoratlashtirish",
+   "fields": [
+    "Jami o'quvchilar (Oʻ)",
+    "Davlat xaridlari, so'm (A₁)",
+    "Boshqa tushumlar, so'm (A₂)",
+    "Hudud koeffitsienti (Kh)"
+   ]
+  },
+  "K3.3": {
+   "title": "Dual ta'limning ulushi",
+   "fields": [
+    "Jami o'quvchilar (Oʻ)",
+    "Dual ta'limda (Oʻ₁)",
+    "Boshqa shaklda"
+   ]
+  },
+  "K3.4": {
+   "title": "Bitiruvchilarning bandlik holati",
+   "fields": [
+    "Jami bitiruvchilar (B)",
+    "Tadbirkor / ta'sischi (B₁)",
+    "Ish bilan band (B₂)",
+    "O'qishda / o'zini band qilgan (B₃)"
+   ]
+  },
+  "K4.1": {
+   "title": "Nufuzli tanlovlarda g'olib o'quvchilar",
+   "fields": [
+    "Jami o'quvchilar (Oʻ)",
+    "WorldSkills (Oʻ₁)",
+    "Milliy tanlov, respublika (Oʻ₂)",
+    "Milliy tanlov, hudud (Oʻ₃)",
+    "Boshqa kasbiy tanlov (Oʻ₄)",
+    "Xalqaro olimpiada (Oʻ₅)",
+    "Respublika bosqichi (Oʻ₆)",
+    "Boshqa tanlovlar (Oʻ₇)"
+   ]
+  },
+  "K4.2": {
+   "title": "Sertifikatga ega o'quvchilar",
+   "fields": [
+    "Jami o'quvchilar (Oʻ)",
+    "Xalqaro sertifikat (Oʻ₁)",
+    "Milliy sertifikat (Oʻ₂)"
+   ]
+  }
+ },
+ "colleges": {
+  "200056906": {
+   "name": "1-son Namangan Abu Ali ibn Sino nomidagi Jamoat salomatligi texnikumi",
+   "region": "Namangan viloyati",
+   "data": {
+    "K1.1": [
+     67,
+     0,
+     0,
+     0
+    ],
+    "K1.2": [
+     67,
+     4,
+     8,
+     9
+    ],
+    "K1.3": [
+     67,
+     0,
+     5,
+     0
+    ],
+    "K1.5": [
+     67,
+     0,
+     3
+    ],
+    "K1.6": [
+     6,
+     0.8042
+    ],
+    "K1.7": [
+     67,
+     51,
+     0,
+     0
+    ],
+    "K1.8": [
+     4,
+     0.8675
+    ],
+    "K2.1": [
+     3,
+     0.8497
+    ],
+    "K2.2": [
+     5,
+     0.8782
+    ],
+    "K2.3": [
+     1313434,
+     10332
+    ],
+    "K2.4": [
+     720,
+     673
+    ],
+    "K2.5": [
+     1173,
+     0,
+     0
+    ],
+    "K3.2": [
+     1173,
+     0,
+     0,
+     1
+    ],
+    "K3.3": [
+     942,
+     0,
+     942
+    ],
+    "K3.4": [
+     263,
+     5,
+     37,
+     67
+    ],
+    "K4.1": [
+     1173,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "K4.2": [
+     1173,
+     0,
+     32
+    ]
+   }
+  }
+ }
+}

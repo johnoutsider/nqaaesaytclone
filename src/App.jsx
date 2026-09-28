@@ -6,21 +6,21 @@ import Sidebar from './components/Sidebar.jsx'
 import Footer from './components/Footer.jsx'
 import VolumeModal from './components/VolumeModal.jsx'
 import University from './components/university/University.jsx'
-import VocationalRating from './components/rating/VocationalRating.jsx'
+import VocationalPassport from './components/passport/VocationalPassport.jsx'
 import VocationalClone from './components/clone/VocationalClone.jsx'
 import { organization } from './data/organization.js'
 import { vocational } from './data/vocational.js'
 
 // Sahifalar (hash — sayt serversiz va istalgan papkada ham ishlaydi):
 //   #/litsey          — litsey pasporti (qayta ishlangan)
-//   #/texnikum        — texnikum pasporti: indikatorlar asosidagi yangi sahifa (docs/TEXNIKUM-SAHIFA-REJASI.md)
+//   #/texnikum        — texnikum pasporti: o'z ko'rsatkichlari, reyting (ball/o'rin) ko'rsatilmaydi
 //   #/texnikum-asl    — texnikum pasportining ASL KLONI (nqaae.uz/uz/vocational/200056906, 28.09.2026) — solishtirish uchun
 //   #/texnikum-yangi  — eski manzil, #/texnikum bilan bir xil
 // css: 'v2' — asl saytning 28.09.2026 dagi yangilangan main.min.css; custom: false — bizning custom.css o'chiriladi
 const vocationalNew = {
   title: "Kasbiy ta'lim tashkilotlari",
   sidebar: 'vocational',
-  render: () => <VocationalRating org={vocational} />,
+  render: () => <VocationalPassport org={vocational} />,
 }
 const PAGES = {
   litsey: {
