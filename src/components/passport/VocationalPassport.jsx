@@ -218,6 +218,59 @@ function Teachers({ d, site }) {
   )
 }
 
+// O'quvchilar umumiy kartasi.
+// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+function StudentsOverview({ d, variant }) {
+  const O = d['K4.2'][0]
+  const dual = d['K3.3'][1]
+  const intl = d['K2.5'][1]
+  const other = Math.max(O - dual, 0)
+  const tag = { A: 'Ikki ko‘rsatkich', B: 'Ta’lim shakllari', C: 'Jami + taqsimot chizig‘i' }[variant]
+  return (
+    <div className="sv-variant">
+      <span className="sv-variant__tag">Variant {variant} · {tag}</span>
+      {variant === 'A' && (
+        <OverviewCard
+          items={[
+            { label: "Jami o'quvchilar", value: O },
+            { label: "Shundan dual ta'limda", display: fmt(dual), unit: `nafar · ${pct(dual, O)}%` },
+          ]}
+        />
+      )}
+      {variant === 'B' && (
+        <OverviewCard
+          items={[
+            { label: "Jami o'quvchilar", value: O },
+            { label: "Dual ta'limda", value: dual },
+            { label: "Xalqaro va qo'shma dasturlarda", value: intl },
+          ]}
+        />
+      )}
+      {variant === 'C' && (
+        <div className="grad-overview mb-3">
+          <div className="grad-overview__stats">
+            <div className="grad-overview__stat">
+              <div className="teacher-certs__icon"><img src={`${IMG}/university-staff-1.svg`} alt="" /></div>
+              <div>
+                <p className="teacher-certs__label">Jami o'quvchilar</p>
+                <p className="grad-overview__value"><b className="teacher-certs__num">{fmt(O)}</b> <span className="teacher-certs__unit">nafar</span></p>
+              </div>
+            </div>
+          </div>
+          <div className="grad-overview__split">
+            {dual > 0 && <span className="is-in" style={{ width: `${(dual / O) * 100}%` }}></span>}
+            <span className="is-rest" style={{ width: `${(other / O) * 100}%` }}></span>
+          </div>
+          <div className="grad-overview__legend">
+            <span><i className="is-in"></i>Dual ta'limda: {fmt(dual)} nafar ({pct(dual, O)}%)</span>
+            <span><i className="is-rest"></i>Boshqa ta'lim shakllarida: {fmt(other)} nafar ({pct(other, O)}%)</span>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function Students({ d, site }) {
   const [O, xCert, mCert] = d['K4.2']
   const [dualTotal, dual] = d['K3.3']
@@ -228,13 +281,9 @@ function Students({ d, site }) {
   return (
     <div>
       <SectionTop title="O'quvchilar" date={passport.date} />
-      <OverviewCard
-        items={[
-          { label: "Jami o'quvchilar", value: O },
-          { label: "Dual ta'limda", value: dual },
-          { label: 'Sertifikatga ega', value: xCert + mCert },
-        ]}
-      />
+      <StudentsOverview d={d} variant="A" />
+      <StudentsOverview d={d} variant="B" />
+      <StudentsOverview d={d} variant="C" />
       <div className="row">
         <div className="col-lg-4 mb-3">
           <PercentCard

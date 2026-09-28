@@ -1283,3 +1283,7 @@ a.contact-row:hover .contact-row__action {
    qatorlar karta balandligi bo'ylab teng taqsimlanadi. */
 .content-section__inner.h-100 > .qual-list { flex: 1; justify-content: space-between; }
 .content-section__inner.h-100 > .qual-list .qual-list__row { flex: 1; align-items: center; }
+
+/* O'quvchilar umumiy kartasi — variantlar (A–C), tanlovdan keyin olib tashlanadi */
+.sv-variant { position: relative; margin-top: 14px; }
+.sv-variant__tag { position: absolute; top: -12px; right: 16px; z-index: 2; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
