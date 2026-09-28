@@ -62,16 +62,6 @@ function PercentCard({ label, percent, text, note, variant = 'intl', icon = 'uni
 // (4 ta variantdan foydalanuvchi tanlagani: "D — ulushlar chizig'i", 29.09.2026).
 const PROG_COLORS = ['#3E7BB6', '#19AE8B', '#FFA151', '#7161FF', '#E187FF', '#4E95DA', '#23939F', '#F2C94C', '#B3BCCB']
 
-function ProgramsNote({ declared }) {
-  const empty = Math.max((declared || 0) - programs.programs.length, 0)
-  return (
-    <p className="teacher-certs__note mt-3 mb-0">
-      {empty > 0 && `${declared} ta dasturdan ${empty} tasida hozir o'quvchi yo'q. `}
-      Barcha o'quvchilar {Object.keys(programs.forms).join(', ').toLowerCase()} ta'lim shaklida. Manba: o'quvchilar ro'yxati.
-    </p>
-  )
-}
-
 function ProgramsShare() {
   return (
     <div>
@@ -110,7 +100,6 @@ function Programs({ declared }) {
           <img src={`${IMG}/vocational-famous.svg`} alt="" /> Dasturlar va o'quvchilar soni
         </h2>
         <ProgramsShare />
-        <ProgramsNote declared={declared} />
       </div>
     </div>
   )
