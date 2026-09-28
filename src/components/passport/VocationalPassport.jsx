@@ -16,6 +16,42 @@ import Contacts from '../university/Contacts.jsx'
 const fmt = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 const pct = (part, whole, d = 0) => (whole > 0 ? ((part / whole) * 100).toFixed(d).replace('.', ',') : '0')
 
+// VAQTINCHA: "Malaka toifasiga ega" ulushini ko'rsatish variantlari (A–C) — foydalanuvchi bittasini tanlaydi
+function MiniRing({ share }) {
+  const r = 24, c = 2 * Math.PI * r
+  return (
+    <div className="qo-ring">
+      <svg width="64" height="64" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r={r} fill="none" stroke="#e8edf4" strokeWidth="7" />
+        <circle cx="32" cy="32" r={r} fill="none" stroke="#3E7BB6" strokeWidth="7" strokeLinecap="round"
+          strokeDasharray={`${(share / 100) * c} ${c}`} transform="rotate(-90 32 32)" />
+      </svg>
+      <b>{share}%</b>
+    </div>
+  )
+}
+
+function QualOverviewVariants({ P, q }) {
+  const share = Math.round((q / P) * 100)
+  const base = { label: 'Malaka toifasiga ega', display: fmt(q), unit: 'nafar', icon: 'university-stat-1.svg' }
+  const variants = [
+    ['A', 'Foiz belgisi', { ...base, badge: <span className="grad-overview__pct">{share}%</span> }],
+    ['B', 'Kichik halqa', { ...base, aside: <MiniRing share={share} /> }],
+    ['C', "Ulush chizig'i", { ...base, below: (
+      <div className="qo-bar">
+        <div className="qo-bar__track"><i style={{ width: `${share}%` }}></i></div>
+        <span><b>{share}%</b> — jami {P} nafar pedagogdan</span>
+      </div>
+    ) }],
+  ]
+  return variants.map(([k, name, item]) => (
+    <div key={k} className="qo-variant">
+      <span className="qo-variant__tag">Variant {k} · {name}</span>
+      <OverviewCard items={[{ label: 'Jami pedagoglar', value: P }, item]} />
+    </div>
+  ))
+}
+
 // Sodda ro'yxat: nom — qiymat
 function FactList({ title, rows, icon = 'university-direction.svg', note }) {
   return (
@@ -169,12 +205,7 @@ function Teachers({ d, site }) {
   return (
     <div>
       <SectionTop title="Pedagoglar" date={passport.date} />
-      <OverviewCard
-        items={[
-          { label: 'Jami pedagoglar', value: P },
-          { label: 'Malaka toifasiga ega', display: fmt(bosh + yetakchi + katta), unit: `nafar · ${pct(bosh + yetakchi + katta, P)}%`, icon: 'university-stat-1.svg' },
-        ]}
-      />
+      <QualOverviewVariants P={P} q={bosh + yetakchi + katta} />
       <div className="row">
         <div className="col-lg-6 mb-3">
           <BreakdownCard

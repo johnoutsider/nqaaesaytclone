@@ -15,7 +15,8 @@ export function SectionTop({ title, date, className = 'university-top', children
 }
 
 // Jami / mahalliy / xorijiy — bitta qatorda (Pedagoglar va O'quvchilar bo'limlarida)
-function OverviewStat({ label, value, unit = 'nafar', display, icon = 'university-staff-1.svg' }) {
+// badge — raqam yonidagi belgi; below — raqam ostidagi qo'shimcha; aside — o'ng tomondagi element
+function OverviewStat({ label, value, unit = 'nafar', display, icon = 'university-staff-1.svg', badge, below, aside }) {
   return (
     <div className="grad-overview__stat">
       <div className="teacher-certs__icon">
@@ -35,8 +36,11 @@ function OverviewStat({ label, value, unit = 'nafar', display, icon = 'universit
               <CountUp className="teacher-certs__num" value={value} /> {unit && <span className="teacher-certs__unit">{unit}</span>}
             </>
           )}
+          {badge}
         </p>
+        {below}
       </div>
+      {aside}
     </div>
   )
 }
