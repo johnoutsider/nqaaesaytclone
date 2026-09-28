@@ -326,29 +326,81 @@ function Students({ d, site }) {
   )
 }
 
-function Admission({ d }) {
-  const [plan, admitted] = d['K2.4']
+// Qabul ko'rsatkichlari: reja, qabul qilinganlar va ommabop kasb va mutaxassisliklar
+// (ommaboplik — 1-kurs o'quvchilari soni bo'yicha, ya'ni joriy qabul; manba: o'quvchilar ro'yxati).
+// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+function popularByIntake(limit = 5) {
+  return programs.programs
+    .map((p) => ({ name: p.name, count: p.courses['1'] || 0 }))
+    .filter((p) => p.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit)
+}
+const intakeTotal = () => programs.courses['1'] || 0
+
+function PopularRanked({ items, compact }) {
+  const max = items[0]?.count || 1
+  return (
+    <div className={`av-pop ${compact ? 'is-compact' : ''}`}>
+      {items.map((p, i) => (
+        <div key={p.name} className="av-pop__row">
+          <span className={`av-pop__rank ${i < 3 ? `is-top${i + 1}` : ''}`}>{i + 1}</span>
+          <div className="av-pop__body">
+            <p className="av-pop__head"><span>{p.name}</span><b>{fmt(p.count)} <small>nafar</small></b></p>
+            <div className="av-pop__bar"><i style={{ width: `${(p.count / max) * 100}%` }}></i></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// A — chapda bajarilish halqasi + reja/qabul kataklari, o'ngda ommabop reyting (bitiruvchilar bloki bilan bir uslub)
+function AdmissionRing({ plan, admitted }) {
+  const r = 62, c = 2 * Math.PI * r
+  const share = plan ? admitted / plan : 0
+  return (
+    <div className="content-section__inner mb-3 gv-a">
+      <div className="gv-a__ring">
+        <div className="gv-a__circle">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r={r} fill="none" stroke="#e8edf4" strokeWidth="16" />
+            <circle cx="80" cy="80" r={r} fill="none" stroke="#3E7BB6" strokeWidth="16" strokeLinecap="round"
+              strokeDasharray={`${Math.min(share, 1) * c} ${c}`} transform="rotate(-90 80 80)" />
+          </svg>
+          <div className="gv-a__center"><b className="av-blue">{pct(admitted, plan, 1)}%</b><span>bajarildi</span></div>
+        </div>
+        <div className="gv-a__nums">
+          <p><b>{fmt(plan)}</b><span>Qabul rejasi</span></p>
+          <p className="is-band av-band"><b>{fmt(admitted)}</b><span>Qabul qilinganlar</span></p>
+        </div>
+      </div>
+      <div className="gv-a__side">
+        <h2 className="university-bars--title"><img src={`${IMG}/vocational-famous.svg`} alt="" /> Ommabop kasb va mutaxassisliklar</h2>
+        <PopularRanked items={popularByIntake()} />
+        <p className="av-note">1-kurs o'quvchilari soni bo'yicha (jami {fmt(intakeTotal())} nafar)</p>
+      </div>
+    </div>
+  )
+}
+
+// B — tepada reja/qabul chizig'i (to'liq kenglik), ostida TOP-3 medal kartalari + qolganlari ro'yxatda
+function AdmissionCards({ plan, admitted }) {
   const free = Math.max(plan - admitted, 0)
   const done = plan > 0 ? Math.min(100, (admitted / plan) * 100) : 0
+  const pop = popularByIntake()
   return (
-    <div>
-      <SectionTop title="Qabul" date={passport.date} />
+    <>
       <div className="grad-overview mb-3">
         <div className="grad-overview__stats">
           <div className="grad-overview__stat">
             <div className="teacher-certs__icon"><img src={`${IMG}/university-stat-1.svg`} alt="" /></div>
-            <div>
-              <p className="teacher-certs__label">Qabul rejasi</p>
-              <p className="grad-overview__value"><b className="teacher-certs__num">{fmt(plan)}</b> <span className="teacher-certs__unit">o'rin</span></p>
-            </div>
+            <div><p className="teacher-certs__label">Qabul rejasi</p><p className="grad-overview__value"><b className="teacher-certs__num">{fmt(plan)}</b> <span className="teacher-certs__unit">o'rin</span></p></div>
           </div>
           <div className="grad-overview__divider"></div>
           <div className="grad-overview__stat">
             <div className="teacher-certs__icon"><img src={`${IMG}/university-staff-1.svg`} alt="" /></div>
-            <div>
-              <p className="teacher-certs__label">Qabul qilinganlar</p>
-              <p className="grad-overview__value"><b className="teacher-certs__num">{fmt(admitted)}</b> <span className="teacher-certs__unit">nafar</span></p>
-            </div>
+            <div><p className="teacher-certs__label">Qabul qilinganlar</p><p className="grad-overview__value"><b className="teacher-certs__num">{fmt(admitted)}</b> <span className="teacher-certs__unit">nafar · {pct(admitted, plan, 1)}%</span></p></div>
           </div>
         </div>
         <div className="grad-overview__split">
@@ -360,6 +412,58 @@ function Admission({ d }) {
           {free > 0 && <span><i className="is-rest"></i>{fmt(free)} o'rin bo'sh qoldi</span>}
         </div>
       </div>
+      <div className="content-section__inner mb-3">
+        <h2 className="university-bars--title"><img src={`${IMG}/vocational-famous.svg`} alt="" /> Ommabop kasb va mutaxassisliklar</h2>
+        <div className="av-medals">
+          {pop.slice(0, 3).map((p, i) => (
+            <div key={p.name} className={`av-medal is-top${i + 1}`}>
+              <span className="av-medal__rank">{i + 1}</span>
+              <p className="av-medal__name">{p.name}</p>
+              <p className="av-medal__num"><b>{fmt(p.count)}</b> nafar · {pct(p.count, intakeTotal())}%</p>
+            </div>
+          ))}
+        </div>
+        <p className="av-note">1-kurs o'quvchilari soni bo'yicha (jami {fmt(intakeTotal())} nafar)</p>
+      </div>
+    </>
+  )
+}
+
+// C — bitta karta: chapda katta "673 / 720" + chiziq + bo'sh o'rinlar, o'ngda ixcham ommabop ro'yxat
+function AdmissionCompact({ plan, admitted }) {
+  const free = Math.max(plan - admitted, 0)
+  const done = plan > 0 ? Math.min(100, (admitted / plan) * 100) : 0
+  return (
+    <div className="content-section__inner mb-3 av-c">
+      <div className="av-c__left">
+        <p className="av-c__label">Qabul rejasining bajarilishi</p>
+        <p className="av-c__big"><b>{fmt(admitted)}</b><span> / {fmt(plan)} o'rin</span></p>
+        <div className="av-c__bar"><i style={{ width: `${done}%` }}></i></div>
+        <div className="av-c__facts">
+          <p><b>{pct(admitted, plan, 1)}%</b><span>bajarildi</span></p>
+          <p><b>{fmt(free)}</b><span>bo'sh o'rin</span></p>
+        </div>
+      </div>
+      <div className="av-c__right">
+        <h2 className="university-bars--title"><img src={`${IMG}/vocational-famous.svg`} alt="" /> Ommabop kasb va mutaxassisliklar</h2>
+        <PopularRanked items={popularByIntake(3)} compact />
+        <p className="av-note">1-kurs o'quvchilari soni bo'yicha</p>
+      </div>
+    </div>
+  )
+}
+
+function Admission({ d }) {
+  const [plan, admitted] = d['K2.4']
+  return (
+    <div>
+      <SectionTop title="Qabul ko'rsatkichlari" date={passport.date} />
+      {[['A', 'Halqa + reyting', AdmissionRing], ['B', 'Chiziq + TOP-3 kartalar', AdmissionCards], ['C', 'Bitta ixcham karta', AdmissionCompact]].map(([k, name, View]) => (
+        <div key={k} className="av-variant">
+          <span className="av-variant__tag">Variant {k} · {name}</span>
+          <View plan={plan} admitted={admitted} />
+        </div>
+      ))}
     </div>
   )
 }
@@ -383,18 +487,7 @@ function gradData(d) {
   }
 }
 
-function PopularList({ popular }) {
-  return (
-    <div className="gv-popular">
-      <p className="gv-popular__title">Ommabop mutaxassisliklar</p>
-      {popular.map((p) => (
-        <p key={p.name} className="gv-popular__row"><span>{p.name}</span><b>{p.count}</b></p>
-      ))}
-    </div>
-  )
-}
-
-function GradRing({ d, popular }) {
+function GradRing({ d }) {
   const { B, band, parts } = gradData(d)
   const r = 62, c = 2 * Math.PI * r
   const max = Math.max(...parts.map((p) => p.value), 1)
@@ -425,17 +518,16 @@ function GradRing({ d, popular }) {
             <span className="gv-a__pct">{pct(p.value, B)}%</span>
           </div>
         ))}
-        <PopularList popular={popular} />
       </div>
     </div>
   )
 }
 
-function Graduates({ d, popular }) {
+function Graduates({ d }) {
   return (
     <div>
       <SectionTop title="Bitiruvchilar" date={passport.date} />
-      <GradRing d={d} popular={popular} />
+      <GradRing d={d} />
     </div>
   )
 }
@@ -496,7 +588,7 @@ export default function VocationalPassport({ org }) {
       <Programs />
       <Students d={d} site={org.students} />
       <Admission d={d} />
-      <Graduates d={d} popular={org.graduates.popular} />
+      <Graduates d={d} />
       <Production d={d} />
       <Buildings data={org.buildings} />
       <Survey data={org.survey} />
