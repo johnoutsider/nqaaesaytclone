@@ -7,11 +7,15 @@ import Footer from './components/Footer.jsx'
 import VolumeModal from './components/VolumeModal.jsx'
 import University from './components/university/University.jsx'
 import Vocational from './components/university/Vocational.jsx'
+import VocationalClone from './components/clone/VocationalClone.jsx'
 import { organization } from './data/organization.js'
 import { vocational } from './data/vocational.js'
 
-// Sahifalar: #/litsey (o'rta maxsus — litsey pasporti) va #/texnikum (kasbiy ta'lim — texnikum pasporti).
-// Hash ishlatiladi — sayt serversiz (file://) va istalgan papkada ham ishlaydi.
+// Sahifalar (hash — sayt serversiz va istalgan papkada ham ishlaydi):
+//   #/litsey          — litsey pasporti (qayta ishlangan)
+//   #/texnikum        — texnikum pasportining ASL KLONI (nqaae.uz/uz/vocational/200056906, 28.09.2026)
+//   #/texnikum-yangi  — texnikum pasporti, litsey uslubida qayta ishlangan variant
+// css: 'v2' — asl saytning 28.09.2026 dagi yangilangan main.min.css; custom: false — bizning custom.css o'chiriladi
 const PAGES = {
   litsey: {
     title: "O'rta maxsus ta'lim tashkilotlari",
@@ -21,8 +25,19 @@ const PAGES = {
   texnikum: {
     title: "Kasbiy ta'lim tashkilotlari",
     sidebar: 'vocational',
+    css: 'v2',
+    custom: false,
+    render: () => <VocationalClone />,
+  },
+  'texnikum-yangi': {
+    title: "Kasbiy ta'lim tashkilotlari",
+    sidebar: 'vocational',
     render: () => <Vocational org={vocational} />,
   },
+}
+const CSS_FILES = {
+  v1: './assets/public/css/main.min.css',
+  v2: './assets/public/css/main.2026-09-28.min.css',
 }
 const SIDEBAR_LINKS = { secondary: '#/litsey', vocational: '#/texnikum' }
 
@@ -46,6 +61,11 @@ export default function App() {
 
   useEffect(() => {
     document.title = page.title
+    const main = document.getElementById('main-css')
+    const href = CSS_FILES[page.css || 'v1']
+    if (main && !main.href.endsWith(href.slice(1))) main.setAttribute('href', href)
+    const custom = document.getElementById('custom-css')
+    if (custom) custom.disabled = page.custom === false
   }, [page])
 
   useEffect(() => {
