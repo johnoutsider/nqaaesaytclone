@@ -119,7 +119,7 @@ function expertGroups(d) {
         items: [
           { label: 'Ishlab chiqarishdan (soha mutaxassisi)', short: 'Soha mutaxassisi', value: soha },
           { label: 'Xorijiy mutaxassis', short: 'Xorijiy mutaxassis', value: xorijiy },
-          { label: 'OTM professori', short: 'OTM professori', value: otm },
+          { label: 'OTT professori', short: 'OTT professori', value: otm },
         ],
       },
       {
