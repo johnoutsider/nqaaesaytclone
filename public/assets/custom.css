@@ -1349,3 +1349,16 @@ a.contact-row:hover .contact-row__action {
 .gv-a__nums span { font-size: 12px; line-height: 1.25; color: #697d9f; }
 .gv-a .gv-a__nums p.is-band { background: rgba(25, 174, 139, .12); }
 .gv-a__nums .is-band b { color: #19ae8b; }
+
+/* Chap ustun (halqa + raqamlar) kartaning to'liq balandligini egallaydi — pastda bo'sh joy qolmaydi */
+.gv-a { align-items: stretch !important; }
+.gv-a__ring { justify-content: space-between; }
+.gv-a__nums { flex: 1; align-items: stretch; width: 100%; }
+.gv-a .gv-a__nums p { flex: 1; justify-content: center; gap: 4px; }
+.gv-a__nums b { font-size: 34px; }
+.gv-a__nums span { font-size: 13px; }
+@media only screen and (max-width: 991px) {
+  .gv-a__ring { justify-content: flex-start; }
+}
+.gv-a .gv-a__nums p { min-width: 124px; }
+.gv-a__nums span { white-space: nowrap; }

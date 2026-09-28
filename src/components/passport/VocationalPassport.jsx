@@ -415,7 +415,7 @@ function GradRing({ d, popular }) {
         </div>
       </div>
       <div className="gv-a__bars">
-        <h2 className="university-bars--title"><img src={`${IMG}/university-direction.svg`} alt="" /> Bitiruvchilar qayerda?</h2>
+        <h2 className="university-bars--title"><img src={`${IMG}/university-direction.svg`} alt="" /> Bitiruvchilar bandlik toifalari kesimida</h2>
         {parts.map((p) => (
           <div key={p.label} className="gv-a__row">
             <span className="gv-a__label">{p.label}</span>
