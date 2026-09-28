@@ -1418,3 +1418,8 @@ a.contact-row:hover .contact-row__action {
 @media only screen and (max-width: 576px) {
   .pv-share__legend { grid-template-columns: 1fr; }
 }
+
+/* Bog'lanish: bitta "Telefon raqam" qatorida bir nechta raqam ustma-ust */
+.contact-row__phone { display: block; color: inherit; text-decoration: none; }
+.contact-row__phone + .contact-row__phone { margin-top: 2px; }
+.contact-row__phone:hover { color: #3e7bb6; }

@@ -4,6 +4,8 @@ MUHIM: reyting hali e'lon qilinmagan. Shuning uchun faylga FAQAT tanlangan texni
 o'z ko'rsatkichlari (xom qiymatlar: pedagoglar soni, bitiruvchilar bandligi va h.k.) yoziladi.
 Ball, Ki, reytingdagi o'rin, median va boshqa texnikumlar ma'lumoti yozilmaydi — sayt orqali
 ularni ko'rish imkoni bo'lmasligi kerak.
+Istisno: K2.4 (qabul) — Excel'dagi bajarilish ulushi (formula "Fayldagi ulush ÷ 100", ya'ni Ki × 100)
+"Bajarilish ulushi (%)" ustuni sifatida yoziladi (foydalanuvchi qarori, 29.09.2026).
 
 Ishlatish:
     python scripts/texnikum_excel_to_json.py "C:/.../Texnikumlar - indikatorlar 2026-09-28.xlsx" [STIR,STIR,...]
@@ -21,6 +23,10 @@ from pathlib import Path
 import openpyxl
 
 
+# Faylda tayyor ulush sifatida berilgan ko'rsatkichlar: Ki = ulush ÷ 100 (ball emas)
+SHARE_FROM_KI = {'K2.4'}
+
+
 def num(x):
     if x in (None, ''):
         return 0
@@ -36,12 +42,13 @@ def main(path, keep):
         code, title = [s.strip() for s in rows[0][0].split('—', 1)]
         computed_at = computed_at or re.search(r'Hisoblangan:\s*([\d.]+)', rows[3][0]).group(1)
         raw_cols = list(rows[5][4:-2])  # faqat xom ustunlar: Ki va Ball olinmaydi
-        fields[code] = {'title': title, 'fields': raw_cols}
+        share = code in SHARE_FROM_KI
+        fields[code] = {'title': title, 'fields': raw_cols + (['Bajarilish ulushi (%)'] if share else [])}
         for r in rows[6:]:
             if not r or str(r[2]) not in keep:
                 continue
             c = colleges.setdefault(str(r[2]), {'name': r[1], 'region': r[3], 'data': {}})
-            c['data'][code] = [num(v) for v in r[4:-2]]
+            c['data'][code] = [num(v) for v in r[4:-2]] + ([num(round(float(r[-2]) * 100, 2))] if share else [])
     out = {'source': Path(path).name, 'date': computed_at, 'fields': fields, 'colleges': colleges}
     dst = Path(__file__).resolve().parent.parent / 'src' / 'data' / 'vocational-passport.json'
     dst.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding='utf-8')

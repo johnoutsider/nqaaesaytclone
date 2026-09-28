@@ -358,9 +358,10 @@ function PopularRanked({ items }) {
   )
 }
 
-function AdmissionRing({ plan, admitted }) {
+// share: bajarilish ulushi (%) — Excel'dagi qiymat (qabul parametri fayli bo'yicha), 673 ÷ 720 hisobi emas
+function AdmissionRing({ plan, admitted, share: sharePct }) {
   const r = 62, c = 2 * Math.PI * r
-  const share = plan ? admitted / plan : 0
+  const share = sharePct / 100
   return (
     <div className="content-section__inner mb-3 gv-a">
       <div className="gv-a__ring">
@@ -370,7 +371,7 @@ function AdmissionRing({ plan, admitted }) {
             <circle cx="80" cy="80" r={r} fill="none" stroke="#3E7BB6" strokeWidth="16" strokeLinecap="round"
               strokeDasharray={`${Math.min(share, 1) * c} ${c}`} transform="rotate(-90 80 80)" />
           </svg>
-          <div className="gv-a__center"><b className="av-blue">{pct(admitted, plan, 1)}%</b><span>bajarildi</span></div>
+          <div className="gv-a__center"><b className="av-blue">{String(sharePct).replace('.', ',')}%</b><span>bajarildi</span></div>
         </div>
         <div className="gv-a__nums">
           <p><b>{fmt(plan)}</b><span>Qabul rejasi</span></p>
@@ -387,11 +388,11 @@ function AdmissionRing({ plan, admitted }) {
 }
 
 function Admission({ d }) {
-  const [plan, admitted] = d['K2.4']
+  const [plan, admitted, share] = d['K2.4']
   return (
     <div>
       <SectionTop title="Qabul ko'rsatkichlari" date={passport.date} />
-      <AdmissionRing plan={plan} admitted={admitted} />
+      <AdmissionRing plan={plan} admitted={admitted} share={share} />
     </div>
   )
 }
@@ -545,8 +546,9 @@ export default function VocationalPassport({ org }) {
   const d = c.data
   return (
     <div className="university">
+      {/* Ta'lim dasturlari soni — faqat o'quvchisi bor dasturlar (o'quvchilar ro'yxati bo'yicha) */}
       <UniversityHeader
-        org={org}
+        org={{ ...org, programs: { ...org.programs, total: programs.programs.length } }}
         onProgramsClick={() => document.getElementById('talim-dasturlari')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
       />
       <Teachers d={d} site={org.teachers} />
@@ -558,7 +560,7 @@ export default function VocationalPassport({ org }) {
       <Buildings data={org.buildings} />
       <Survey data={org.survey} summary={<Opinions d={d} />} />
       <Rating data={org.rating} />
-      <Contacts data={org.contacts} />
+      <Contacts data={org.contacts} foundedYear={org.foundedYear} />
     </div>
   )
 }

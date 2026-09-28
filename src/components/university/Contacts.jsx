@@ -29,7 +29,23 @@ function ContactRow({ icon, label, value, href, action, external }) {
   )
 }
 
-export default function Contacts({ data }) {
+// Telefon raqamlari bitta "Telefon raqam" qatorida, ustma-ust (nechta bo'lsa ham qator ko'paymaydi).
+// foundedYear berilsa — "Tashkil etilish asosi" o'rniga "Tashkil etilgan yil".
+function PhoneRow({ phones }) {
+  return (
+    <div className="contact-row">
+      <span className="contact-row__icon"><i className="i-phone"></i></span>
+      <span className="contact-row__body">
+        <span className="contact-row__label">Telefon raqam</span>
+        {phones.map((p) => (
+          <a key={p} className="contact-row__value contact-row__phone" href={`tel:${p.replace(/[^\d+]/g, '')}`}>{p}</a>
+        ))}
+      </span>
+    </div>
+  )
+}
+
+export default function Contacts({ data, foundedYear }) {
   const phones = [].concat(data.phone || [])
   const site = data.website?.replace(/^https?:\/\//, '').replace(/\/$/, '')
 
@@ -39,11 +55,13 @@ export default function Contacts({ data }) {
       <div className="row mb-3 contacts-block">
         <div className="col-lg-5 mb-3 mb-lg-0">
           <div className="content-section__inner h-100 contact-card">
-            {phones.map((p) => (
-              <ContactRow key={p} icon="i-phone" label="Telefon raqam" value={p} href={`tel:${p.replace(/[^\d+]/g, '')}`} action="Qo'ng'iroq" />
-            ))}
+            {phones.length > 0 && <PhoneRow phones={phones} />}
             {site && <ContactRow icon="i-web" label="Rasmiy veb-sayt" value={site} href={data.website} action="Ochish" external />}
-            {data.basis && <ContactRow icon="i-docs" label="Tashkil etilish asosi" value={data.basis} />}
+            {foundedYear ? (
+              <ContactRow icon="i-docs" label="Tashkil etilgan yil" value={foundedYear} />
+            ) : (
+              data.basis && <ContactRow icon="i-docs" label="Tashkil etilish asosi" value={data.basis} />
+            )}
             <ContactRow icon="i-email" label="Elektron manzil" value={data.email} href={`mailto:${data.email}`} action="Yozish" />
             <ContactRow icon="i-location" label="Yuridik manzil" value={data.address} href={mapLink(data)} action="Xaritada" external />
           </div>

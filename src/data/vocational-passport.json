@@ -85,7 +85,8 @@
    "title": "Qabul parametrlarining bajarilishi",
    "fields": [
     "Reja (qabul parametri)",
-    "Qabul qilinganlar"
+    "Qabul qilinganlar",
+    "Bajarilish ulushi (%)"
    ]
   },
   "K2.5": {
@@ -200,7 +201,8 @@
     ],
     "K2.4": [
      720,
-     673
+     673,
+     88
     ],
     "K2.5": [
      1173,
