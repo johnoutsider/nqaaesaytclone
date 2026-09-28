@@ -1409,3 +1409,12 @@ a.contact-row:hover .contact-row__action {
 @media only screen and (max-width: 576px) {
   .pr-a__legend { grid-template-columns: 1fr; }
 }
+
+/* Tekshiruv tuzatishlari (29.09.2026) */
+.src-note { margin: -8px 0 16px !important; text-align: left; }
+/* Ta'lim dasturlari: uzun nomlar ikki qatorga tushmasligi uchun kengroq ustunlar */
+.pv-share__legend { grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+.pv-share__name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media only screen and (max-width: 576px) {
+  .pv-share__legend { grid-template-columns: 1fr; }
+}

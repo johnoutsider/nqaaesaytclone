@@ -22,7 +22,7 @@ export function CertItem({ label, count, total, unit, variant }) {
       <div className="teacher-certs__bar">
         <span style={{ width: `${percent}%` }}></span>
       </div>
-      <p className="teacher-certs__note">Jami {total} nafar {unit}dan</p>
+      <p className="teacher-certs__note">Jami {String(total).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} nafar {unit}dan</p>
     </div>
   )
 }

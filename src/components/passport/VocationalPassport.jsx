@@ -121,7 +121,7 @@ function expertGroups(d) {
         items: [
           { label: 'Ilmiy darajali pedagog', short: 'Ilmiy darajali', value: ilmiy },
           { label: 'Xorijdan jalb qilingan pedagog', short: 'Xorijdan jalb qilingan', value: xorijdan },
-          { label: 'TOP-1 000 OTM diplomiga ega', short: 'TOP-1 000 OTM diplomi', value: top1000 },
+          { label: 'TOP-1 000 OTT diplomiga ega', short: 'TOP-1 000 OTT diplomi', value: top1000 },
         ],
       },
     ],
@@ -164,7 +164,6 @@ function ExpertsCard({ d }) {
 
 function Teachers({ d, site }) {
   const [P, bosh, yetakchi, katta] = d['K1.2']
-  const [, soha, xorijiy, otm] = d['K1.7']
   const [, xCert, mCert] = d['K1.5']
   const [, ustaKurs, pedKurs, xorijda] = d['K1.3']
   return (
@@ -173,7 +172,7 @@ function Teachers({ d, site }) {
       <OverviewCard
         items={[
           { label: 'Jami pedagoglar', value: P },
-          { label: 'Ishlab chiqarishdan jalb qilinganlar', value: soha + xorijiy + otm, icon: 'university-stat-1.svg' },
+          { label: 'Malaka toifasiga ega', display: fmt(bosh + yetakchi + katta), unit: `nafar · ${pct(bosh + yetakchi + katta, P)}%`, icon: 'university-stat-1.svg' },
         ]}
       />
       <div className="row">
@@ -210,10 +209,13 @@ function Teachers({ d, site }) {
         items={site.ages}
         total={site.ages.reduce((s, a) => s + a.value, 0)}
         summary={[
-          { label: '30 yoshgacha yosh pedagoglar', from: 0, to: 1, variant: 'young' },
+          { label: '30 yoshgacha pedagoglar', from: 0, to: 1, variant: 'young' },
           { label: '50 yoshdan katta pedagoglar', from: -2, variant: 'senior' },
         ]}
       />
+      <p className="teacher-certs__note src-note">
+        Yosh tarkibi: nqaae.uz pasporti bo'yicha ({site.date}, {site.ages.reduce((s, a) => s + a.value, 0)} nafar pedagog)
+      </p>
     </div>
   )
 }
@@ -278,6 +280,7 @@ function CoursesColumns() {
           </div>
         ))}
       </div>
+      <p className="av-note">O'quvchilar ro'yxati bo'yicha, jami {fmt(programs.total)} nafar</p>
     </div>
   )
 }
@@ -553,8 +556,7 @@ export default function VocationalPassport({ org }) {
       <Graduates d={d} />
       <Production d={d} />
       <Buildings data={org.buildings} />
-      <Survey data={org.survey} />
-      <Opinions d={d} />
+      <Survey data={org.survey} summary={<Opinions d={d} />} />
       <Rating data={org.rating} />
       <Contacts data={org.contacts} />
     </div>

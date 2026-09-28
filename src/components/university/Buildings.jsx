@@ -8,7 +8,7 @@ function InfraItem({ value, label }) {
           <img src={`${IMG}/university-building.svg`} alt="" />
         </div>
         <div className="university-infra-item-content">
-          <p className="university-infra-item-content-title ">{value ?? NA}</p>
+          <p className="university-infra-item-content-title ">{typeof value === 'number' ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : value ?? NA}</p>
           <p className="university-infra-item-content-desc">{label}</p>
         </div>
         <div className="university-infra-item-effect">
@@ -25,7 +25,7 @@ export default function Buildings({ data }) {
       <SectionTop title="Bino va inshootlar" date={data.date} className=" university-top " />
       <div className=" university-infra-wrapper">
         <InfraItem value={data.educationalCapacity} label="O'quv binolari quvvati" />
-        <InfraItem value={data.residenceCapacity} label="Talabalar turar joylari quvvati" />
+        <InfraItem value={data.residenceCapacity} label={data.residenceLabel ?? 'Talabalar turar joylari quvvati'} />
       </div>
     </div>
   )

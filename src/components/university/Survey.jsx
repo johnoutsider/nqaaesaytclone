@@ -43,8 +43,7 @@ function SurveyGroup({ group }) {
           <h5 className="mb-2">{group.title}</h5>
           {group.items.length ? (
             <p className="survey-summary">
-              {group.items.length} ta savol · o'rtacha ijobiy javob{' '}
-              <b>{Math.round(group.items.reduce((s, d) => s + d.positive, 0) / group.items.length)}%</b>
+              {group.items.length} ta savol — ochish uchun bosing
             </p>
           ) : (
             <p className="soon">11232131311311212</p>
@@ -67,10 +66,10 @@ function SurveyGroup({ group }) {
                   <div className="col-6">
                     <div className="charts-donut__labels">
                       <div className="charts-donut__label charts-donut__label--positive">
-                        <span className="charts-donut__label-text"><strong>{d.positive}%</strong><br />Ijobiy</span>
+                        <span className="charts-donut__label-text"><strong>{String(d.positive).replace('.', ',')}%</strong><br />Ijobiy</span>
                       </div>
                       <div className="charts-donut__label charts-donut__label--negative">
-                        <span className="charts-donut__label-text"><strong>{d.negative}%</strong><br />Salbiy</span>
+                        <span className="charts-donut__label-text"><strong>{String(d.negative).replace('.', ',')}%</strong><br />Salbiy</span>
                       </div>
                     </div>
                   </div>
@@ -84,7 +83,8 @@ function SurveyGroup({ group }) {
   )
 }
 
-export default function Survey({ data }) {
+// summary: ixtiyoriy — sarlavha ostida, savollardan oldin ko'rsatiladigan xulosa bloki
+export default function Survey({ data, summary }) {
   return (
     <div>
       <SectionTop title="Umummilliy so'rovnoma natijalari" className="university-top ">
@@ -96,6 +96,7 @@ export default function Survey({ data }) {
           </select>
         </div>
       </SectionTop>
+      {summary}
       <section className="faq dont_activate_me mb-3 ">
         {data.groups.map((g) => (
           <SurveyGroup key={g.title} group={g} />

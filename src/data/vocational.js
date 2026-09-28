@@ -98,16 +98,17 @@ export const vocational = {
 
   buildings: {
     educationalCapacity: 1260,
-    residenceCapacity: null, // talabalar yotoqxonasi mavjud emas
+    residenceCapacity: null, // yotoqxona mavjud emas
+    residenceLabel: "O'quvchilar turar joyi (yotoqxona) quvvati",
   },
 
   survey: {
     years: ['2026'],
-    groups: surveyGroups, // Professor-o'qituvchilar (18 savol), Talabalar (18 savol)
+    // asl saytda "Professor-o'qituvchilar" va "Talabalar" — texnikum uchun "Pedagoglar" va "O'quvchilar"
+    groups: surveyGroups.map((g) => ({ ...g, title: { "Professor-o'qituvchilar": 'Pedagoglar', Talabalar: "O'quvchilar" }[g.title] ?? g.title })),
   },
 
   rating: {
-    date: '--.--.----',
     chart: [
       { label: 'Akademik faoliyat (ball)', value: 5 },
       { label: 'Ilmiy faoliyat (ball)', value: 2 },
