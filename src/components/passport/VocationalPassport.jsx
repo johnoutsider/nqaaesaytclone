@@ -84,7 +84,7 @@ function ProgramsShare() {
   )
 }
 
-function Programs({ declared }) {
+function Programs() {
   return (
     <div id="talim-dasturlari">
       <SectionTop title="Ta'lim dasturlari" />
@@ -422,7 +422,7 @@ export default function VocationalPassport({ org }) {
         onProgramsClick={() => document.getElementById('talim-dasturlari')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
       />
       <Teachers d={d} site={org.teachers} />
-      <Programs declared={org.programs.total} />
+      <Programs />
       <Students d={d} site={org.students} />
       <Admission d={d} />
       <Graduates d={d} popular={org.graduates.popular} />
