@@ -1,4 +1,4 @@
-// Texnikum pasporti — indikatorlar asosidagi yangi sahifa (#/texnikum-yangi).
+// Texnikum pasporti — indikatorlar asosidagi yangi sahifa (#/texnikum; asl klon: #/texnikum-asl).
 // Reja: docs/TEXNIKUM-SAHIFA-REJASI.md. Indikatorlar: src/data/vocational-rating.json
 // (scripts/texnikum_excel_to_json.py bilan Excel'dan). Pasport ma'lumotlari (yosh, mutaxassisliklar,
 // so'rovnoma savollari, bino, bog'lanish): src/data/vocational.js — amaldagi nqaae.uz sahifasidan.
@@ -123,7 +123,7 @@ function Hero({ c, strengths, growth }) {
         <div className="rt-list rt-list--good">
           <p className="rt-list__title">Kuchli tomonlar</p>
           {strengths.map((i) => (
-            <a key={i.code} href={`#/texnikum-yangi`} onClick={(e) => { e.preventDefault(); document.getElementById(i.code)?.scrollIntoView({ behavior: 'smooth', block: 'center' }) }}>
+            <a key={i.code} href="#/texnikum" onClick={(e) => { e.preventDefault(); document.getElementById(i.code)?.scrollIntoView({ behavior: 'smooth', block: 'center' }) }}>
               <span>{i.title}</span>
               <em>eng yaxshi {topPercent(i.better, N)}%</em>
             </a>
@@ -132,7 +132,7 @@ function Hero({ c, strengths, growth }) {
         <div className="rt-list rt-list--bad">
           <p className="rt-list__title">O'sish nuqtalari</p>
           {growth.map((i) => (
-            <a key={i.code} href={`#/texnikum-yangi`} onClick={(e) => { e.preventDefault(); document.getElementById(i.code)?.scrollIntoView({ behavior: 'smooth', block: 'center' }) }}>
+            <a key={i.code} href="#/texnikum" onClick={(e) => { e.preventDefault(); document.getElementById(i.code)?.scrollIntoView({ behavior: 'smooth', block: 'center' }) }}>
               <span>{i.title}</span>
               <em>−{ballText(i.max - i.ball)} ball</em>
             </a>

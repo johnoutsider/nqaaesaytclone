@@ -13,26 +13,29 @@ import { vocational } from './data/vocational.js'
 
 // Sahifalar (hash — sayt serversiz va istalgan papkada ham ishlaydi):
 //   #/litsey          — litsey pasporti (qayta ishlangan)
-//   #/texnikum        — texnikum pasportining ASL KLONI (nqaae.uz/uz/vocational/200056906, 28.09.2026)
-//   #/texnikum-yangi  — texnikum pasporti: indikatorlar asosidagi yangi sahifa (docs/TEXNIKUM-SAHIFA-REJASI.md)
+//   #/texnikum        — texnikum pasporti: indikatorlar asosidagi yangi sahifa (docs/TEXNIKUM-SAHIFA-REJASI.md)
+//   #/texnikum-asl    — texnikum pasportining ASL KLONI (nqaae.uz/uz/vocational/200056906, 28.09.2026) — solishtirish uchun
+//   #/texnikum-yangi  — eski manzil, #/texnikum bilan bir xil
 // css: 'v2' — asl saytning 28.09.2026 dagi yangilangan main.min.css; custom: false — bizning custom.css o'chiriladi
+const vocationalNew = {
+  title: "Kasbiy ta'lim tashkilotlari",
+  sidebar: 'vocational',
+  render: () => <VocationalRating org={vocational} />,
+}
 const PAGES = {
   litsey: {
     title: "O'rta maxsus ta'lim tashkilotlari",
     sidebar: 'secondary',
     render: () => <University org={organization} />,
   },
-  texnikum: {
+  texnikum: vocationalNew,
+  'texnikum-yangi': vocationalNew,
+  'texnikum-asl': {
     title: "Kasbiy ta'lim tashkilotlari",
     sidebar: 'vocational',
     css: 'v2',
     custom: false,
     render: () => <VocationalClone />,
-  },
-  'texnikum-yangi': {
-    title: "Kasbiy ta'lim tashkilotlari",
-    sidebar: 'vocational',
-    render: () => <VocationalRating org={vocational} />,
   },
 }
 const CSS_FILES = {
