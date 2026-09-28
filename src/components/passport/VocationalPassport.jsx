@@ -105,10 +105,126 @@ function Programs({ declared }) {
   )
 }
 
+// Jalb qilingan mutaxassislar va ilmiy salohiyat.
+// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+function expertGroups(d) {
+  const [P, ilmiy, xorijdan, top1000] = d['K1.1']
+  const [, soha, xorijiy, otm] = d['K1.7']
+  return {
+    P,
+    groups: [
+      {
+        title: 'Jalb qilingan mutaxassislar',
+        color: '#19AE8B',
+        items: [
+          { label: 'Ishlab chiqarishdan (soha mutaxassisi)', short: 'Soha mutaxassisi', value: soha },
+          { label: 'Xorijiy mutaxassis', short: 'Xorijiy mutaxassis', value: xorijiy },
+          { label: 'OTM professori', short: 'OTM professori', value: otm },
+        ],
+      },
+      {
+        title: 'Ilmiy salohiyat',
+        color: '#7161FF',
+        items: [
+          { label: 'Ilmiy darajali pedagog', short: 'Ilmiy darajali', value: ilmiy },
+          { label: 'Xorijdan jalb qilingan pedagog', short: 'Xorijdan jalb qilingan', value: xorijdan },
+          { label: 'TOP-1 000 OTM diplomiga ega', short: 'TOP-1 000 OTM diplomi', value: top1000 },
+        ],
+      },
+    ],
+  }
+}
+
+// A — ikki guruh, har biri 3 ta raqamli plitka; nol plitkalar kulrang
+function ExpertsTiles({ d }) {
+  const { groups } = expertGroups(d)
+  return (
+    <div className="ex-tiles">
+      {groups.map((g) => (
+        <div key={g.title} className="ex-tiles__group" style={{ '--c': g.color }}>
+          <p className="ex-tiles__title">{g.title}</p>
+          <div className="ex-tiles__row">
+            {g.items.map((it) => (
+              <div key={it.label} className={`ex-tile ${it.value ? 'is-on' : ''}`}>
+                <b>{it.value}</b>
+                <span>{it.short}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// B — ikki blok: katta jami raqam + jamoadagi ulushi, ostida qisqa ro'yxat
+function ExpertsSummary({ d }) {
+  const { P, groups } = expertGroups(d)
+  return (
+    <div className="ex-sum">
+      {groups.map((g) => {
+        const total = g.items.reduce((s, i) => s + i.value, 0)
+        return (
+          <div key={g.title} className="ex-sum__block" style={{ '--c': g.color }}>
+            <p className="ex-sum__title">{g.title}</p>
+            <p className="ex-sum__big"><b>{total}</b> nafar</p>
+            <p className="ex-sum__sub">{total ? `${pct(total, P + (g.title.startsWith('Jalb') ? total : 0))}% — jamoadagi ulushi` : 'Hozircha yo‘q'}</p>
+            <div className="ex-sum__list">
+              {g.items.map((it) => (
+                <p key={it.label}><span>{it.short}</span><b>{it.value}</b></p>
+              ))}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+// C — "nishonlar": 6 ta doira, ichida son; bor bo'lsa rangli, yo'q bo'lsa kulrang
+function ExpertsBadges({ d }) {
+  const { groups } = expertGroups(d)
+  return (
+    <div className="ex-badges">
+      {groups.map((g) => (
+        <div key={g.title} className="ex-badges__group" style={{ '--c': g.color }}>
+          <p className="ex-badges__title">{g.title}</p>
+          <div className="ex-badges__row">
+            {g.items.map((it) => (
+              <div key={it.label} className={`ex-badge ${it.value ? 'is-on' : ''}`}>
+                <span className="ex-badge__circle">{it.value}</span>
+                <span className="ex-badge__label">{it.short}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const EXPERT_VARIANTS = [
+  ['A', 'Plitkalar', ExpertsTiles],
+  ['B', 'Jami + ro‘yxat', ExpertsSummary],
+  ['C', 'Nishonlar', ExpertsBadges],
+]
+
+function ExpertsCard({ d, variant }) {
+  const [key, name, View] = EXPERT_VARIANTS.find((v) => v[0] === variant)
+  return (
+    <div className="content-section__inner h-100 ex-variant">
+      <span className="ex-variant__tag">Variant {key} · {name}</span>
+      <h2 className="university-bars--title">
+        <img src={`${IMG}/university-direction.svg`} alt="" /> Jalb qilingan mutaxassislar va ilmiy salohiyat
+      </h2>
+      <View d={d} />
+    </div>
+  )
+}
+
 function Teachers({ d, site }) {
   const [P, bosh, yetakchi, katta] = d['K1.2']
   const [, soha, xorijiy, otm] = d['K1.7']
-  const [, ilmiy, xorijdan, top1000] = d['K1.1']
   const [, xCert, mCert] = d['K1.5']
   const [, ustaKurs, pedKurs, xorijda] = d['K1.3']
   return (
@@ -118,7 +234,6 @@ function Teachers({ d, site }) {
         items={[
           { label: 'Jami pedagoglar', value: P },
           { label: 'Ishlab chiqarishdan jalb qilinganlar', value: soha + xorijiy + otm, icon: 'university-stat-1.svg' },
-          { label: 'O‘rtacha yosh', display: String(site.avgAge), unit: 'yosh', icon: 'calendar-uni.svg' },
         ]}
       />
       <div className="row">
@@ -135,17 +250,16 @@ function Teachers({ d, site }) {
           />
         </div>
         <div className="col-lg-6 mb-3">
-          <FactList
-            title="Jalb qilingan mutaxassislar va ilmiy salohiyat"
-            rows={[
-              { label: 'Ishlab chiqarishdan (soha mutaxassisi)', value: soha },
-              { label: 'Xorijiy mutaxassis', value: xorijiy },
-              { label: 'OTM professori', value: otm },
-              { label: 'Ilmiy darajali pedagog', value: ilmiy },
-              { label: 'Xorijdan jalb qilingan pedagog', value: xorijdan },
-              { label: 'TOP-1 000 OTM diplomiga ega', value: top1000 },
-            ]}
-          />
+          <ExpertsCard d={d} variant="A" />
+        </div>
+      </div>
+      {/* VAQTINCHA: B va C variantlari — tanlovdan keyin olib tashlanadi */}
+      <div className="row">
+        <div className="col-lg-6 mb-3">
+          <ExpertsCard d={d} variant="B" />
+        </div>
+        <div className="col-lg-6 mb-3">
+          <ExpertsCard d={d} variant="C" />
         </div>
       </div>
       <div className="content-section__inner teacher-certs mb-3">
@@ -164,7 +278,6 @@ function Teachers({ d, site }) {
       <AgeStructure
         items={site.ages}
         total={site.ages.reduce((s, a) => s + a.value, 0)}
-        avgAge={site.avgAge}
         summary={[
           { label: '30 yoshgacha yosh pedagoglar', from: 0, to: 1, variant: 'young' },
           { label: '50 yoshdan katta pedagoglar', from: -2, variant: 'senior' },

@@ -1264,3 +1264,35 @@ a.contact-row:hover .contact-row__action {
 .pv-share__item i { flex-shrink: 0; align-self: center; width: 12px; height: 12px; border-radius: 4px; }
 .pv-share__name { flex: 1; }
 .pv-share__item small { width: 38px; text-align: right; color: #697d9f; }
+
+/* Jalb qilingan mutaxassislar va ilmiy salohiyat — variantlar (A–C), tanlovdan keyin bittasi qoladi */
+.ex-variant { position: relative; }
+.ex-variant__tag { position: absolute; top: -12px; right: 16px; padding: 3px 12px; border-radius: 20px; background: #0a1f44; color: #fff; font-size: 13px; font-weight: 600; }
+.ex-tiles, .ex-sum, .ex-badges { display: flex; flex-direction: column; gap: 16px; }
+.ex-tiles__title, .ex-sum__title, .ex-badges__title { margin: 0 0 8px !important; font-size: 14px; font-weight: 600; color: #3a4a66; text-align: left; }
+/* A */
+.ex-tiles__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ex-tile { display: flex; flex-direction: column; gap: 4px; padding: 12px; border-radius: 12px; background: #f3f5f9; color: #9aa6ba; }
+.ex-tile b { font-size: 28px; line-height: 1; }
+.ex-tile span { font-size: 13px; line-height: 1.25; }
+.ex-tile.is-on { background: var(--c); color: #fff; }
+/* B */
+.ex-sum { flex-direction: row; }
+.ex-sum__block { flex: 1; padding: 14px 16px; border-radius: 12px; background: #f7f9fc; border-top: 4px solid var(--c); }
+.ex-sum__block p { text-align: left; }
+.ex-sum__big { margin: 0 !important; color: #3a4a66; font-size: 15px; }
+.ex-sum__big b { font-size: 36px; font-weight: 700; color: var(--c); }
+.ex-sum__sub { margin: 2px 0 10px !important; font-size: 13px; color: #697d9f; }
+.ex-sum__list p { display: flex; justify-content: space-between; margin: 0 !important; padding: 6px 0; border-top: 1px solid #e8edf4; font-size: 14px; color: #3a4a66; }
+.ex-sum__list b { color: #000; }
+/* C */
+.ex-badges__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ex-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.ex-badge__circle { display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; background: #eef2f7; color: #9aa6ba; font-size: 22px; font-weight: 700; }
+.ex-badge.is-on .ex-badge__circle { background: var(--c); color: #fff; box-shadow: 0 6px 14px rgba(0, 0, 0, .12); }
+.ex-badge__label { font-size: 13px; line-height: 1.25; color: #3a4a66; }
+.ex-badge:not(.is-on) .ex-badge__label { color: #9aa6ba; }
+@media only screen and (max-width: 576px) {
+  .ex-sum { flex-direction: column; }
+  .ex-tile b { font-size: 22px; }
+}
