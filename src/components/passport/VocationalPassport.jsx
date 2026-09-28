@@ -190,7 +190,7 @@ function Teachers({ d, site }) {
             total={P}
             items={[
               { key: 'Bosh o‘qituvchi', value: bosh },
-              { key: 'Yetakchi o‘qituvchi / sertifikatli usta', value: yetakchi },
+              { key: 'Yetakchi o‘qituvchi', value: yetakchi },
               { key: 'Katta o‘qituvchi', value: katta },
               { key: 'Toifasiz', value: Math.max(P - bosh - yetakchi - katta, 0) },
             ]}

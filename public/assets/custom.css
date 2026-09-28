@@ -1278,3 +1278,8 @@ a.contact-row:hover .contact-row__action {
 @media only screen and (max-width: 576px) {
   .ex-sum { flex-direction: column; }
 }
+
+/* Balandligi qo'shni kartaga tenglashtirilgan (h-100) kartalarda ro'yxat bo'sh joy qoldirmaydi:
+   qatorlar karta balandligi bo'ylab teng taqsimlanadi. */
+.content-section__inner.h-100 > .qual-list { flex: 1; justify-content: space-between; }
+.content-section__inner.h-100 > .qual-list .qual-list__row { flex: 1; align-items: center; }
