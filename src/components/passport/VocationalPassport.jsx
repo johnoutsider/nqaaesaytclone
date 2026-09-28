@@ -218,8 +218,8 @@ function Teachers({ d, site }) {
   )
 }
 
-// Tanlov g'oliblari + kurslar kesimi.
-// VAQTINCHA: 3 ta ko'rinish varianti (A–C) — foydalanuvchi bittasini tanlaydi.
+// Tanlov g'oliblari (ixcham: jami + 2 guruh) va kurslar kesimi (vertikal ustunlar)
+// (3 ta variantdan foydalanuvchi tanlagani: "B — ixcham + ustunlar", 29.09.2026).
 const COMP_GROUPS = [
   { title: 'Kasbiy tanlovlar', color: '#FFA151', idx: [0, 1, 2, 3] },
   { title: 'Olimpiadalar', color: '#7161FF', idx: [4, 5, 6] },
@@ -235,50 +235,7 @@ function CardHead({ children, icon = 'university-direction.svg' }) {
   )
 }
 
-// A — tanlovlar: 2 guruh plitkalari (bor bo'lsa rangli); kurslar: 3 ta katta raqamli plitka
-function CompTilesA({ vals }) {
-  const total = vals.reduce((s, v) => s + v, 0)
-  return (
-    <div className="content-section__inner h-100">
-      <CardHead>Tanlov va olimpiada g'oliblari</CardHead>
-      <p className="cv-total"><b>{total}</b> nafar g'olib</p>
-      {COMP_GROUPS.map((g) => (
-        <div key={g.title} className="cv-group" style={{ '--c': g.color }}>
-          <p className="cv-group__title">{g.title}</p>
-          <div className="cv-tiles">
-            {g.idx.map((i) => (
-              <div key={i} className={`cv-tile ${vals[i] ? 'is-on' : ''}`}>
-                <b>{vals[i]}</b>
-                <span>{COMP_NAMES[i]}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-function CoursesTilesA() {
-  const entries = Object.entries(programs.courses)
-  return (
-    <div className="content-section__inner h-100">
-      <CardHead>Kurslar kesimida</CardHead>
-      <div className="cv-course-tiles">
-        {entries.map(([k, v], i) => (
-          <div key={k} className="cv-course-tile" style={{ '--c': COURSE_COLORS[i] }}>
-            <span>{k}-kurs</span>
-            <b>{fmt(v)}</b>
-            <small>{pct(v, programs.total)}% o'quvchilar</small>
-            <div className="cv-course-tile__bar"><i style={{ width: `${pct(v, programs.total)}%` }}></i></div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-// B — tanlovlar: jami + ikki guruh yig'indisi (ixcham); kurslar: vertikal ustunlar
-function CompCompactB({ vals }) {
+function CompCompact({ vals }) {
   const total = vals.reduce((s, v) => s + v, 0)
   return (
     <div className="content-section__inner h-100">
@@ -302,7 +259,7 @@ function CompCompactB({ vals }) {
     </div>
   )
 }
-function CoursesColumnsB() {
+function CoursesColumns() {
   const entries = Object.entries(programs.courses)
   const max = Math.max(...entries.map(([, v]) => v), 1)
   return (
@@ -319,54 +276,6 @@ function CoursesColumnsB() {
           </div>
         ))}
       </div>
-    </div>
-  )
-}
-
-// C — bitta keng karta: chapda kurslar (bo'lingan chiziq, raqam ichida), o'ngda tanlovlar belgi (chip) ko'rinishida
-function CompCoursesWideC({ vals }) {
-  const entries = Object.entries(programs.courses)
-  return (
-    <div className="content-section__inner mb-3 cv-wide">
-      <div className="cv-wide__part">
-        <CardHead>Kurslar kesimida</CardHead>
-        <div className="cv-seg">
-          {entries.map(([k, v], i) => (
-            <span key={k} style={{ flex: v, background: COURSE_COLORS[i] }}>
-              <b>{fmt(v)}</b> {k}-kurs
-            </span>
-          ))}
-        </div>
-        <p className="cv-seg__note">Jami {fmt(programs.total)} o'quvchi</p>
-      </div>
-      <div className="cv-wide__part">
-        <CardHead>Tanlov va olimpiada g'oliblari</CardHead>
-        <div className="cv-chips">
-          {COMP_NAMES.map((n, i) => (
-            <span key={n} className={`cv-chip ${vals[i] ? 'is-on' : ''}`}>
-              {n} <b>{vals[i]}</b>
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function CompCoursesVariant({ d, variant }) {
-  const vals = d['K4.1'].slice(1, 8)
-  const tag = { A: 'Plitkalar', B: 'Ixcham + ustunlar', C: 'Bitta keng karta' }[variant]
-  return (
-    <div className="cv-variant">
-      <span className="cv-variant__tag">Variant {variant} · {tag}</span>
-      {variant === 'C' ? (
-        <CompCoursesWideC vals={vals} />
-      ) : (
-        <div className="row">
-          <div className="col-lg-6 mb-3">{variant === 'A' ? <CompTilesA vals={vals} /> : <CompCompactB vals={vals} />}</div>
-          <div className="col-lg-6 mb-3">{variant === 'A' ? <CoursesTilesA /> : <CoursesColumnsB />}</div>
-        </div>
-      )}
     </div>
   )
 }
@@ -407,9 +316,10 @@ function Students({ d, site }) {
           <CertItem label="Milliy sertifikatga ega" count={mCert} total={O} unit="o'quvchi" variant="national" />
         </div>
       </div>
-      <CompCoursesVariant d={d} variant="A" />
-      <CompCoursesVariant d={d} variant="B" />
-      <CompCoursesVariant d={d} variant="C" />
+      <div className="row">
+        <div className="col-lg-6 mb-3"><CompCompact vals={d['K4.1'].slice(1, 8)} /></div>
+        <div className="col-lg-6 mb-3"><CoursesColumns /></div>
+      </div>
     </div>
   )
 }
